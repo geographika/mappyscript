@@ -1,0 +1,1 @@
+from _mappyscript import version, version_number, load, loads
