@@ -273,3 +273,5 @@ build
 /mappyscript/_mappyscript.pyd
 /mappyscript/src
 /README.rst
+/mappyscript.egg-info
+/dist

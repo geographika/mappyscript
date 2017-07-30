@@ -1,5 +1,9 @@
-from setuptools import setup, Extension
+from setuptools import setup, Extension, Distribution
 
+# https://stackoverflow.com/a/39640762/179520
+class BinaryDistribution(Distribution):
+    def is_pure(self):
+        return False
 try:
     from Cython.Distutils import build_ext
     from Cython.Build import cythonize
@@ -25,5 +29,8 @@ setup(
     license = "MIT",
     keywords = "mapserver mapscript mapfile mappyfile",
     ext_modules=cythonize(exts) if USE_CYTHON else exts,
-    cmdclass={'build_ext': build_ext} if USE_CYTHON else {}
+    #cmdclass={'build_ext': build_ext} if USE_CYTHON else {},
+    packages=["mappyscript"],
+    include_package_data=True,
+    #distclass=BinaryDistribution
 )
