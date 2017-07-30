@@ -48,6 +48,7 @@
     <Content Include="docs\cython.rst" />
     <Content Include="LICENSE" />
     <Content Include="mappyscript\mapserver.pxd" />
+    <Content Include="mappyscript\_mappyscript.c" />
     <Content Include="mappyscript\_mappyscript.pyx" />
     <Content Include="README.md" />
     <Content Include="requirements-dev.txt" />
