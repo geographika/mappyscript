@@ -78,7 +78,8 @@ build_script:
   - set SDK_INC=%CD%\sdk\%SDK%\include
   - set SDK_LIB=%CD%\sdk\%SDK%\lib
   - set SDK_BIN=%CD%\sdk\%SDK%\bin
-  - mklink %APPVEYOR_BUILD_FOLDER%\mappyscript\src %SDK_INC%
+  #- mklink %APPVEYOR_BUILD_FOLDER%\mappyscript\src %SDK_INC%
+  - robocopy %SDK_INC% %APPVEYOR_BUILD_FOLDER%\mappyscript\src /MIR
   - dir %APPVEYOR_BUILD_FOLDER%\mappyscript\src
   - "%PYTHON%\\python --version"
   - "%PYTHON%\\python.exe -m pip list --format=columns"
