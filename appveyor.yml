@@ -8,9 +8,11 @@ environment:
    #fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.
    - platform: x86 
      PYTHON: "C:\\Python36"
+     DISTUTILS_USE_SDK: "1"
 
    - platform: x64
      PYTHON: "C:\\Python36-x64"
+     DISTUTILS_USE_SDK: "1"
 
    - platform: x86 
      PYTHON: "C:\\Python27"
@@ -74,8 +76,6 @@ build_script:
   - set SDK_INC=%CD%\sdk\%SDK%\include
   - set SDK_LIB=%CD%\sdk\%SDK%\lib
   - set SDK_BIN=%CD%\sdk\%SDK%\bin
-  - echo %SDK_INC%
-  - dir %SDK_INC%
   - mklink %APPVEYOR_BUILD_FOLDER%\mappyscript\src %SDK_INC%
   - dir %APPVEYOR_BUILD_FOLDER%\mappyscript\src
   - "%PYTHON%\\python --version"
