@@ -61,6 +61,8 @@ build_script:
   - set SDK_LIB=%CD%\sdk\%SDK%\lib
   - set SDK_BIN=%CD%\sdk\%SDK%\bin
   - mklink %APPVEYOR_BUILD_FOLDER%\mappyscript\src %SDK_INC%
+  - python --version
+  - pip list
   - python.exe setup.py build_ext --compiler=msvc --include-dirs=%SDK_INC% --library-dirs=%SDK_LIB%
 
 #build: off

@@ -271,3 +271,4 @@ build
 /mappyscript.sln
 /.pypirc
 /mappyscript/_mappyscript.pyd
+/mappyscript/src
