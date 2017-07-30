@@ -77,7 +77,7 @@ test_script:
 # to put the Python version you want to use on PATH.
 - set PATH=%SDK_BIN%;%PATH%
 - echo "%APPVEYOR_BUILD_FOLDER%\\tests\\test.py"
-- "%PYTHON%\\python.exe setup.py %APPVEYOR_BUILD_FOLDER%\\tests\\test.py"
+- "%PYTHON%\\python.exe %APPVEYOR_BUILD_FOLDER%\\tests\\test.py"
 
 after_test:
 # This step builds your wheels.
