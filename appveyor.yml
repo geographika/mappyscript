@@ -77,7 +77,7 @@ test_script:
 # to put the Python version you want to use on PATH.
 - set PATH=%SDK_BIN%;%PATH%
 - "cd %APPVEYOR_BUILD_FOLDER%"
-- "%PYTHON%\\pip install -e ."
+- "%PYTHON%\\python.exe -m pip install -e ."
 - "%PYTHON%\\python.exe -m pip list --format=columns"
 - "%PYTHON%\\python.exe tests\\test.py"
 
