@@ -30,7 +30,7 @@ environment:
 install:
 # We need wheel installed to build wheels
 # See https://www.appveyor.com/docs/environment-variables/ for APPVEYOR_BUILD_FOLDER
-- "python --version"
+- "%PYTHON%\\python --version"
 - "%PYTHON%\\python.exe -m pip install -r %APPVEYOR_BUILD_FOLDER%\\requirements-dev.txt"
 
 # see https://github.com/mapserver/mapserver/blob/branch-7-0/appveyor.yml
@@ -61,9 +61,9 @@ build_script:
   - set SDK_LIB=%CD%\sdk\%SDK%\lib
   - set SDK_BIN=%CD%\sdk\%SDK%\bin
   - mklink %APPVEYOR_BUILD_FOLDER%\mappyscript\src %SDK_INC%
-  - python --version
-  - pip list
-  - python.exe setup.py build_ext --compiler=msvc --include-dirs=%SDK_INC% --library-dirs=%SDK_LIB%
+  - %PYTHON%\\python --version
+  - %PYTHON%\\python.exe -m pip list
+  - %PYTHON%\\python.exe setup.py build_ext --compiler=msvc --include-dirs=%SDK_INC% --library-dirs=%SDK_LIB%
 
 #build: off
 
