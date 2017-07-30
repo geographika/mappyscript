@@ -78,11 +78,11 @@ build_script:
   - set SDK_INC=%CD%\sdk\%SDK%\include
   - set SDK_LIB=%CD%\sdk\%SDK%\lib
   - set SDK_BIN=%CD%\sdk\%SDK%\bin
-  #- mklink %APPVEYOR_BUILD_FOLDER%\mappyscript\src %SDK_INC%
+  - mklink /J %APPVEYOR_BUILD_FOLDER%\mappyscript\src %SDK_INC%
   #- robocopy %SDK_INC% %APPVEYOR_BUILD_FOLDER%\mappyscript\src /MIR
   #- ps: Get-ChildItem -Path "$env:SDK_INC" | Copy-Item -Destination "$env:APPVEYOR_BUILD_FOLDER\mappyscript\src" -Recurse -Container
-  - ps: Get-ChildItem -Path C:\projects\mappyscript\sdk\release-1800\include | Copy-Item -Destination C:\projects\mappyscript\mappyscript\src -Recurse -Container  
-  - dir %APPVEYOR_BUILD_FOLDER%\mappyscript\src
+  #- ps: Get-ChildItem -Path C:\projects\mappyscript\sdk\release-1800\include | Copy-Item -Destination C:\projects\mappyscript\mappyscript\src -Recurse -Container  
+  #- dir %APPVEYOR_BUILD_FOLDER%\mappyscript\src
   - "%PYTHON%\\python --version"
   - "%PYTHON%\\python.exe -m pip list --format=columns"
   - "%PYTHON%\\python.exe setup.py build_ext --compiler=msvc --include-dirs=%SDK_INC% --library-dirs=%SDK_LIB%"
@@ -98,6 +98,7 @@ test_script:
 # the interpreter you're using - Appveyor does not do anything special
 # to put the Python version you want to use on PATH.
 - set PATH=%SDK_BIN%;%PATH%
+- dir  %APPVEYOR_BUILD_FOLDER%\mappyscript
 - "cd %APPVEYOR_BUILD_FOLDER%"
 - "%PYTHON%\\python.exe -m pip install -e ."
 - "%PYTHON%\\python.exe -m pip list --format=columns"
