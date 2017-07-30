@@ -3,29 +3,21 @@ platform:
 - x86
 
 environment:
-  matrix:
-  #
-  # VS 2010
-  #  - VS_VERSION: Visual Studio 10
-  #
-  # VS 2012
-  #  - VS_VERSION: Visual Studio 11
-  #
-  # VS 2013
-  - VS_VERSION: Visual Studio 12
-
-  # For Python versions available on Appveyor, see
-  # http://www.appveyor.com/docs/installed-software#python
-  # The list here is complete (excluding Python 2.6, which
-  # isn't covered by this document) at the time of writing.
-  
-  # https://www.appveyor.com/docs/build-environment/#pre-installed-software
-  
-  - PYTHON: "C:\\Python27"
-  - PYTHON: "C:\\Python27-x64"
-  - PYTHON: "C:\\Python36"
-  - PYTHON: "C:\\Python36-x64"
-  #DISTUTILS_USE_SDK: "1"
+ 
+ - VS_VERSION: Visual Studio 12
+ 
+ # For Python versions available on Appveyor, see
+ # http://www.appveyor.com/docs/installed-software#python
+ # The list here is complete (excluding Python 2.6, which
+ # isn't covered by this document) at the time of writing.
+ 
+ # https://www.appveyor.com/docs/build-environment/#pre-installed-software
+ 
+ - PYTHON: "C:\\Python27"
+ - PYTHON: "C:\\Python27-x64"
+ - PYTHON: "C:\\Python36"
+ - PYTHON: "C:\\Python36-x64"
+ #DISTUTILS_USE_SDK: "1"
 
 # see https://github.com/mapserver/mapserver/blob/branch-7-0/appveyor.yml
 
@@ -60,6 +52,7 @@ build_script:
 install:
 # We need wheel installed to build wheels
 # See https://www.appveyor.com/docs/environment-variables/ for APPVEYOR_BUILD_FOLDER
+- "python --version"
 - "%PYTHON%\\python.exe -m pip install -r %APPVEYOR_BUILD_FOLDER%\requirements-dev.txt"
 
 #build: off

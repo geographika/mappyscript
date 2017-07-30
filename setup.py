@@ -1,13 +1,22 @@
 from setuptools import setup, Extension
 from Cython.Build import cythonize
 
+try:
+    from Cython.Distutils import build_ext
+    from Cython.Build import cythonize
+    USE_CYTHON = True
+except:
+    USE_CYTHON = False
+
 ext_options = {
     'include_dirs': [r"D:\MapServer\release-1800-x64-dev\release-1800-x64\include"],
     'library_dirs': [r"D:\MapServer\release-1800-x64-dev\release-1800-x64\lib"],
     'libraries': ["mapserver"]
     }
 
-ext = Extension("mappyscript._mappyscript", ["mappyscript/_mappyscript.pyx"], **ext_options)
+file_ext = '.pyx' if USE_CYTHON else '.c'
+
+exts = [Extension("mappyscript._mappyscript", ["mappyscript/_mappyscript" + file_ext], **ext_options)]
 
 setup(
     name = "mappyscript",
@@ -16,5 +25,6 @@ setup(
     author = "Seth Girvin",
     license = "MIT",
     keywords = "mapserver mapscript mapfile mappyfile",
-    ext_modules = cythonize([ext])
+    ext_modules=cythonize(exts) if USE_CYTHON else exts,
+    cmdclass={'build_ext': build_ext} if USE_CYTHON else {}
 )
