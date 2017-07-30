@@ -1,6 +1,6 @@
-platform:
-- x64
-- x86
+#platform:
+#- x64
+#- x86
 
 environment:
   matrix:
@@ -21,10 +21,10 @@ environment:
    
    # https://www.appveyor.com/docs/build-environment/#pre-installed-software
    
-   - PYTHON: "C:\\Python27"
+   #- PYTHON: "C:\\Python27"
    - PYTHON: "C:\\Python27-x64"
-   - PYTHON: "C:\\Python36"
-   - PYTHON: "C:\\Python36-x64"
+   #- PYTHON: "C:\\Python36"
+   #- PYTHON: "C:\\Python36-x64"
    #DISTUTILS_USE_SDK: "1"
 
 # see https://github.com/mapserver/mapserver/blob/branch-7-0/appveyor.yml
@@ -61,7 +61,7 @@ install:
 # We need wheel installed to build wheels
 # See https://www.appveyor.com/docs/environment-variables/ for APPVEYOR_BUILD_FOLDER
 - "python --version"
-- "%PYTHON%\\python.exe -m pip install -r %APPVEYOR_BUILD_FOLDER%\requirements-dev.txt"
+- "%PYTHON%\\python.exe -m pip install -r %APPVEYOR_BUILD_FOLDER%\\requirements-dev.txt"
 
 #build: off
 
