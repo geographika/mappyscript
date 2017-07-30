@@ -1,9 +1,15 @@
-platform:
-- x64
+#platform:
+#- x64
 #- x86
 
 environment:
   matrix:
+
+   - platform: x86 
+     PYTHON: "C:\\Python27"
+
+   - platform: x64
+     PYTHON: "C:\\Python27-x64"
    #
    # VS 2010
    #  - VS_VERSION: Visual Studio 10
@@ -21,11 +27,11 @@ environment:
    
    # https://www.appveyor.com/docs/build-environment/#pre-installed-software
    
-   #- PYTHON: "C:\\Python27"
-   - PYTHON: "C:\\Python27-x64"
+   
+   #- PYTHON: "C:\\Python27-x64"
    #- PYTHON: "C:\\Python36"
    #- PYTHON: "C:\\Python36-x64"
-   #DISTUTILS_USE_SDK: "1"
+
 
 install:
 # We need wheel installed to build wheels

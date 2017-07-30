@@ -1,13 +1,14 @@
 import os
 import logging
 import pytest
-
-#DLL_LOCATION = r"C:\MapServer\bin"
-DLL_LOCATION = r"D:\MapServer\release-1500-x64-gdal-mapserver\bin" # fails
-DLL_LOCATION = r"D:\MapServer\release-1800-x64-gdal-mapserver\bin" # works
-os.environ['PATH'] = DLL_LOCATION + ';' + os.environ['PATH']
-
-import mappyscript as ms
+try:
+    import mappyscript as ms
+except ImportError as ex:
+    #DLL_LOCATION = r"C:\MapServer\bin" # works
+    #DLL_LOCATION = r"D:\MapServer\release-1500-x64-gdal-mapserver\bin" # fails
+    DLL_LOCATION = r"D:\MapServer\release-1800-x64-gdal-mapserver\bin" # works
+    os.environ['PATH'] = DLL_LOCATION + ';' + os.environ['PATH']
+    import mappyscript as ms
 
 def test_version():
     v = ms.version()
@@ -68,5 +69,7 @@ def run_tests():
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
+
+
     run_tests()
     print("Done!")
