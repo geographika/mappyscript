@@ -42,17 +42,23 @@
     <Content Include=".gitignore" />
     <Content Include=".pypirc" />
     <Content Include=".travis.yml" />
+    <Content Include="appveyor.yml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="docs\cython.rst" />
     <Content Include="LICENSE" />
     <Content Include="mappyscript\mapserver.pxd" />
     <Content Include="mappyscript\_mappyscript.pyx" />
     <Content Include="README.md" />
+    <Content Include="requirements-dev.txt" />
+    <Content Include="requirements.txt" />
     <Content Include="setup.cfg">
       <SubType>Code</SubType>
     </Content>
     <Content Include="README.rst">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="tests\test.map" />
     <Content Include="tox.ini" />
   </ItemGroup>
   <ItemGroup>

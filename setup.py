@@ -2,8 +2,8 @@ from setuptools import setup, Extension
 from Cython.Build import cythonize
 
 ext_options = {
-    'include_dirs': [r"D:\MapServer\release-1500-x64-gdal-mapserver-libs\include"],
-    'library_dirs': [r"D:\MapServer\release-1500-x64-gdal-mapserver-libs\lib"],
+    'include_dirs': [r"D:\MapServer\release-1800-x64-dev\release-1800-x64\include"],
+    'library_dirs': [r"D:\MapServer\release-1800-x64-dev\release-1800-x64\lib"],
     'libraries': ["mapserver"]
     }
 
