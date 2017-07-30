@@ -80,7 +80,8 @@ build_script:
   - set SDK_BIN=%CD%\sdk\%SDK%\bin
   #- mklink %APPVEYOR_BUILD_FOLDER%\mappyscript\src %SDK_INC%
   #- robocopy %SDK_INC% %APPVEYOR_BUILD_FOLDER%\mappyscript\src /MIR
-  - ps: Get-ChildItem -Path "$env:%SDK_INC%" | Copy-Item -Destination "$env:%APPVEYOR_BUILD_FOLDER%\mappyscript\src" -Recurse -Container
+  #- ps: Get-ChildItem -Path "$env:SDK_INC" | Copy-Item -Destination "$env:APPVEYOR_BUILD_FOLDER\mappyscript\src" -Recurse -Container
+  - ps: Get-ChildItem -Path C:\projects\mappyscript\sdk\release-1800\include | Copy-Item -Destination C:\projects\mappyscript\mappyscript\src -Recurse -Container  
   - dir %APPVEYOR_BUILD_FOLDER%\mappyscript\src
   - "%PYTHON%\\python --version"
   - "%PYTHON%\\python.exe -m pip list --format=columns"
