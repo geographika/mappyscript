@@ -272,3 +272,4 @@ build
 /.pypirc
 /mappyscript/_mappyscript.pyd
 /mappyscript/src
+/README.rst
