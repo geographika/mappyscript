@@ -270,3 +270,4 @@ build
 /.cache/v/cache
 /mappyscript.sln
 /.pypirc
+/mappyscript/_mappyscript.pyd
