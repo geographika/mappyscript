@@ -102,7 +102,7 @@ test_script:
 - "cd %APPVEYOR_BUILD_FOLDER%"
 - "%PYTHON%\\python.exe -m pip install -e ."
 - "%PYTHON%\\python.exe -m pip list --format=columns"
-- "%PYTHON%\\python.exe tests\\test.py"
+#- "%PYTHON%\\python.exe tests\\test.py"
 
 after_test:
 # This step builds your wheels.
