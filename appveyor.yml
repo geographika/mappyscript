@@ -10,6 +10,12 @@ environment:
 
    - platform: x64
      PYTHON: "C:\\Python27-x64"
+
+   - platform: x86 
+     PYTHON: "C:\\Python36"
+
+   - platform: x64
+     PYTHON: "C:\\Python36-x64"
    #
    # VS 2010
    #  - VS_VERSION: Visual Studio 10
