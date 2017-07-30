@@ -76,7 +76,7 @@ test_script:
 # the interpreter you're using - Appveyor does not do anything special
 # to put the Python version you want to use on PATH.
 - set PATH=%SDK_BIN%;%PATH%
-- cd %APPVEYOR_BUILD_FOLDER%
+- "%PYTHON%\\python.exe setup.py install"
 - "%PYTHON%\\python.exe tests\\test.py"
 
 after_test:
