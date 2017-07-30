@@ -6,16 +6,17 @@ environment:
   matrix:
 
    - platform: x86 
+     PYTHON: "C:\\Python36"
+
+   - platform: x64
+     PYTHON: "C:\\Python36-x64"
+
+   - platform: x86 
      PYTHON: "C:\\Python27"
 
    - platform: x64
      PYTHON: "C:\\Python27-x64"
 
-   - platform: x86 
-     PYTHON: "C:\\Python36"
-
-   - platform: x64
-     PYTHON: "C:\\Python36-x64"
    #
    # VS 2010
    #  - VS_VERSION: Visual Studio 10
@@ -73,6 +74,7 @@ build_script:
   - set SDK_LIB=%CD%\sdk\%SDK%\lib
   - set SDK_BIN=%CD%\sdk\%SDK%\bin
   - mklink %APPVEYOR_BUILD_FOLDER%\mappyscript\src %SDK_INC%
+  - dir %APPVEYOR_BUILD_FOLDER%\mappyscript\src
   - "%PYTHON%\\python --version"
   - "%PYTHON%\\python.exe -m pip list --format=columns"
   - "%PYTHON%\\python.exe setup.py build_ext --compiler=msvc --include-dirs=%SDK_INC% --library-dirs=%SDK_LIB%"
