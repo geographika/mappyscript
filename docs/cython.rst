@@ -25,3 +25,5 @@ Build Errors
 * ``build\lib.win-amd64-2.7\mappyscript.pyd : fatal error LNK1120: 1 unresolved externals``
 
 Check paths for build
+
+TypeError: expected bytes, str found

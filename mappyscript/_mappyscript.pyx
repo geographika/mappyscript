@@ -15,6 +15,20 @@ https://github.com/mapserver/mapserver/blob/66309eebb7ba0dc70469efeb40f865a8e88f
 """
 import logging
 cimport mapserver as ms
+from cpython.version cimport PY_MAJOR_VERSION
+
+# see http://cython.readthedocs.io/en/latest/src/tutorial/strings.html
+# https://github.com/cython/cython/wiki/FAQ#how-do-i-pass-a-python-string-parameter-on-to-a-c-library
+
+def _text_to_bytes(text):
+    if isinstance(text, unicode): # most common case first
+        utf8_data = text.encode('UTF-8')
+    elif (PY_MAJOR_VERSION < 3) and isinstance(text, str):
+        text.decode('ASCII') # trial decoding, or however you want to check for plain ASCII data
+        utf8_data = text
+    else:
+        raise ValueError("requires text input, got %s" % type(text))
+    return utf8_data
 
 def version():
     return ms.msGetVersion()
@@ -23,13 +37,13 @@ def version_number():
     return ms.msGetVersionInt()
 
 def load(fn):
-
+    fn = _text_to_bytes(fn)
     cdef ms.mapObj* _cmap
     _cmap = ms.msLoadMap(fn, new_mappath="")
     return _get_map(_cmap)
 
 def loads(mapstring):
-
+    mapstring = _text_to_bytes(mapstring)
     cdef ms.mapObj* map
     map = ms.msLoadMapFromString(mapstring, new_mappath="")
     return _get_map(map)
@@ -58,13 +72,15 @@ cdef class Map:
 
     @property
     def name(self):
-        return self._cmap.name
+        # need to convert to a string for Python3
+        return self._cmap.name.decode('utf-8')
 
     @property
     def SLD(self):
         return ms.msSLDGenerateSLD(self._cmap, -1, NULL)
 
     def draw(self, output_file):
+        output_file = _text_to_bytes(output_file)
         cdef ms.imageObj* img
 
         img = ms.msDrawMap(self._cmap, 0)
