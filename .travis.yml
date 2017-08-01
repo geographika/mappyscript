@@ -12,7 +12,7 @@ before_install:
 - git clone https://github.com/mapserver/mapserver.git
 - echo "$TRAVIS_BUILD_DIR"/mapserver
 - ln -s "$TRAVIS_BUILD_DIR"/mapserver "$TRAVIS_BUILD_DIR"/mappyscript/src
-- cp "$TRAVIS_BUILD_DIR"/mapserver-config.h.in "$TRAVIS_BUILD_DIR"/mapserver-config.h
+- cp "$TRAVIS_BUILD_DIR"/mapserver/mapserver-config.h.in "$TRAVIS_BUILD_DIR"/mapserver/mapserver-config.h
 install: 
 - pip install tox-travis
 - python setup.py install
