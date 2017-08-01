@@ -10,6 +10,7 @@ before_install:
 - sudo apt-get -y install cgi-mapserver
 - echo "$TRAVIS_BUILD_DIR"
 - git clone https://github.com/mapserver/mapserver.git
+- ls -l
 install: 
 - pip install tox-travis
 - python setup.py install
