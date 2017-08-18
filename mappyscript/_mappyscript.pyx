@@ -16,6 +16,7 @@ https://github.com/mapserver/mapserver/blob/66309eebb7ba0dc70469efeb40f865a8e88f
 import logging
 cimport mapserver as ms
 from cpython.version cimport PY_MAJOR_VERSION
+from libc.stdio cimport FILE
 
 # see http://cython.readthedocs.io/en/latest/src/tutorial/strings.html
 # https://github.com/cython/cython/wiki/FAQ#how-do-i-pass-a-python-string-parameter-on-to-a-c-library
@@ -90,7 +91,6 @@ cdef class Map:
 
     def draw_buffer(self):
         """
-        TODO implementation below not working
         See mapserver/mapscript/python/pyextend.i for equivalent in MapScript
         """
         cdef ms.outputFormatObj* format
@@ -103,7 +103,47 @@ cdef class Map:
         cdef unsigned char *img_buffer = NULL
         cdef int img_size
         
-        img_buffer = ms.msSaveImageBuffer(img, &img_size, format)   
-        #ms.msFreeImage(img) 
-        py_string = img_buffer
+        img_buffer = ms.msSaveImageBuffer(img, &img_size, format) 
+        logging.debug("Image buffer size: %i", img_size)
+        ms.msFreeImage(img) 
+        py_string = img_buffer[:img_size]
         return py_string
+
+        
+#def _msIO_getStdoutBufferBytes():
+#   """
+#   See mapscript/swiginc/msio.i
+#   For FILE example see http://cython.readthedocs.io/en/latest/src/userguide/language_basics.html#checking-return-values-of-non-cython-functions
+#   There is no -> operator in Cython. Instead of p->x, use p.x
+#   """
+#
+#   #cdef FILE *ptr_fr
+#   #ms.msIOContext *ctx = ms.msIO_getHandler( (FILE *) "stdout" )
+#   cdef ms.msIOContext *ctx = ms.msIO_getHandler(<FILE>"stdout")
+#   cdef ms.msIOBuffer *buf
+#   cdef ms.gdBuffer gdBuf
+#
+#   # if ( ctx == NULL || ctx->write_channel == MS_FALSE || strcmp(ctx->label,"buffer") != 0 ):
+#   #if ( ctx == NULL || ctx->write_channel == False || strcmp(ctx->label,"buffer") != 0 ):
+#	#    #msSetError( MS_MISCERR, "Can't identify msIO buffer.",
+#   #    #                "msIO_getStdoutBufferString" );
+#	#    #gdBuf.data = (unsigned char*)"";
+#	#    #gdBuf.size = 0;
+#	#    #gdBuf.owns_data = MS_FALSE;
+#	#    #return gdBuf;
+#   #    return NULL
+#
+#   #buf = (ms.msIOBuffer *) ctx.cbData #typecast
+#   buf = <ms.msIOBuffer>ctx.cbData # Type casts are written <type>value http://cython.readthedocs.io/en/latest/src/userguide/language_basics.html#differences-between-c-and-cython-expressions
+#
+#   gdBuf.data = buf.data
+#   gdBuf.size = buf.data_offset
+#   gdBuf.owns_data = True # MS_TRUE
+#
+#   # we are seizing ownership of the buffer contents
+#   buf.data_offset = 0;
+#   buf.data_len = 0;
+#   buf.data = NULL;
+#
+#   return gdBuf;
+

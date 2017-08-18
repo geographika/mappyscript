@@ -39,7 +39,7 @@ MAP
         END
         CLASS
             STYLE
-                COLOR 255 0 0
+                COLOR 0 0 255
                 OUTLINECOLOR 2 2 2
             END
         END
@@ -52,6 +52,7 @@ END
     assert(len(m.SLD) > 0)
 
     m.draw("test1.png")
+
     with open("test2.png", "wb") as f:
         f.write(m.draw_buffer())
 
@@ -68,8 +69,9 @@ def run_tests():
     pytest.main(["tests/test.py"])
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.DEBUG)
 
 
-    run_tests()
+    #run_tests()
+    test_map_from_string()
     print("Done!")

@@ -50,3 +50,38 @@ cdef extern from "src/mapogcsld.h":
 
     # for generating SLD
     char* msSLDGenerateSLD(mapObj* map, int iLayer, const char *pszVersion)
+
+
+## for OGC services - see mapserver/mapscript/mapscript.i
+#ctypedef struct gdBuffer:
+#    unsigned char *data
+#    int size
+#    int owns_data
+#
+## http://cython.readthedocs.io/en/latest/src/userguide/external_C_code.html#styles-of-struct-union-and-enum-declaration
+#
+#from libc.stdio cimport FILE
+#
+#cdef extern from "src/mapio.h":
+#
+#    ctypedef struct msIO_llReadWriteFunc:
+#        void *cbData
+#        void *data
+#        int byteCount
+#
+#    cdef struct msIOContext_t:
+#        const char *label
+#        int write_channel # 1 for stdout/stderr, 0 for stdin
+#        msIO_llReadWriteFunc readWriteFunc
+#        void *cbData
+#
+#    ctypedef msIOContext_t msIOContext
+#
+#    ctypedef struct msIOBuffer:
+#        unsigned char *data
+#        int data_len # really buffer length
+#        int data_offset # really buffer used
+#
+#    msIOContext *msIO_getHandler( FILE * )
+
+

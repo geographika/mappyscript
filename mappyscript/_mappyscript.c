@@ -4,25 +4,25 @@
 {
     "distutils": {
         "depends": [
-            "mappyscript\\src\\maperror.h",
-            "mappyscript\\src\\mapogcsld.h",
+            "mappyscript\\src\\maperror.h", 
+            "mappyscript\\src\\mapogcsld.h", 
             "mappyscript\\src\\mapserver.h"
-        ],
+        ], 
         "include_dirs": [
-            ".\\mappyscript",
+            ".\\mappyscript", 
             "D:\\MapServer\\release-1800-x64-dev\\release-1800-x64\\include"
-        ],
+        ], 
         "libraries": [
             "mapserver"
-        ],
+        ], 
         "library_dirs": [
             "D:\\MapServer\\release-1800-x64-dev\\release-1800-x64\\lib"
-        ],
-        "name": "mappyscript._mappyscript",
+        ], 
+        "name": "mappyscript._mappyscript", 
         "sources": [
             "mappyscript/_mappyscript.pyx"
         ]
-    },
+    }, 
     "module_name": "mappyscript._mappyscript"
 }
 END: Cython Metadata */
@@ -499,6 +499,8 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include "src/maperror.h"
 #include "src/mapserver.h"
 #include "src/mapogcsld.h"
+#include <string.h>
+#include <stdio.h>
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -706,7 +708,7 @@ static const char *__pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_obj_11mappyscript_12_mappyscript_Map;
 
-/* "mappyscript/_mappyscript.pyx":59
+/* "mappyscript/_mappyscript.pyx":60
  *     return Map()._setup(cmap)
  * 
  * cdef class Map:             # <<<<<<<<<<<<<<
@@ -957,6 +959,10 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript_3Map__setup(struct __pyx_o
 
 /* Module declarations from 'cpython.version' */
 
+/* Module declarations from 'libc.string' */
+
+/* Module declarations from 'libc.stdio' */
+
 /* Module declarations from 'mappyscript._mappyscript' */
 static PyTypeObject *__pyx_ptype_11mappyscript_12_mappyscript_Map = 0;
 static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *); /*proto*/
@@ -975,6 +981,7 @@ static const char __pyx_k_test[] = "__test__";
 static const char __pyx_k_text[] = "text";
 static const char __pyx_k_ASCII[] = "ASCII";
 static const char __pyx_k_UTF_8[] = "UTF-8";
+static const char __pyx_k_debug[] = "debug";
 static const char __pyx_k_loads[] = "loads";
 static const char __pyx_k_decode[] = "decode";
 static const char __pyx_k_encode[] = "encode";
@@ -993,6 +1000,7 @@ static const char __pyx_k_text_to_bytes[] = "_text_to_bytes";
 static const char __pyx_k_version_number[] = "version_number";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
+static const char __pyx_k_Image_buffer_size_i[] = "Image buffer size: %i";
 static const char __pyx_k_mappyscript__mappyscript[] = "mappyscript._mappyscript";
 static const char __pyx_k_requires_text_input_got_s[] = "requires text input, got %s";
 static const char __pyx_k_mappyscript__mappyscript_pyx[] = "mappyscript\\_mappyscript.pyx";
@@ -1000,11 +1008,13 @@ static const char __pyx_k_http_mapserver_org_mapscript_im[] = "\nhttp://mapserve
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 static PyObject *__pyx_n_s_ASCII;
 static PyObject *__pyx_kp_s_Error_code;
+static PyObject *__pyx_kp_s_Image_buffer_size_i;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_UTF_8;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_cmap;
+static PyObject *__pyx_n_s_debug;
 static PyObject *__pyx_n_s_decode;
 static PyObject *__pyx_n_s_encode;
 static PyObject *__pyx_n_s_fn;
@@ -1056,7 +1066,7 @@ static PyObject *__pyx_codeobj__8;
 static PyObject *__pyx_codeobj__10;
 static PyObject *__pyx_codeobj__12;
 
-/* "mappyscript/_mappyscript.pyx":23
+/* "mappyscript/_mappyscript.pyx":24
  * # https://github.com/cython/cython/wiki/FAQ#how-do-i-pass-a-python-string-parameter-on-to-a-c-library
  * 
  * def _text_to_bytes(text):             # <<<<<<<<<<<<<<
@@ -1089,7 +1099,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript__text_to_bytes(CYTHON_UNU
   int __pyx_t_5;
   __Pyx_RefNannySetupContext("_text_to_bytes", 0);
 
-  /* "mappyscript/_mappyscript.pyx":24
+  /* "mappyscript/_mappyscript.pyx":25
  * 
  * def _text_to_bytes(text):
  *     if isinstance(text, unicode): # most common case first             # <<<<<<<<<<<<<<
@@ -1100,22 +1110,22 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript__text_to_bytes(CYTHON_UNU
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "mappyscript/_mappyscript.pyx":25
+    /* "mappyscript/_mappyscript.pyx":26
  * def _text_to_bytes(text):
  *     if isinstance(text, unicode): # most common case first
  *         utf8_data = text.encode('UTF-8')             # <<<<<<<<<<<<<<
  *     elif (PY_MAJOR_VERSION < 3) and isinstance(text, str):
  *         text.decode('ASCII') # trial decoding, or however you want to check for plain ASCII data
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_text, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_text, __pyx_n_s_encode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple_, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 26, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_utf8_data = __pyx_t_4;
     __pyx_t_4 = 0;
 
-    /* "mappyscript/_mappyscript.pyx":24
+    /* "mappyscript/_mappyscript.pyx":25
  * 
  * def _text_to_bytes(text):
  *     if isinstance(text, unicode): # most common case first             # <<<<<<<<<<<<<<
@@ -1125,7 +1135,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript__text_to_bytes(CYTHON_UNU
     goto __pyx_L3;
   }
 
-  /* "mappyscript/_mappyscript.pyx":26
+  /* "mappyscript/_mappyscript.pyx":27
  *     if isinstance(text, unicode): # most common case first
  *         utf8_data = text.encode('UTF-8')
  *     elif (PY_MAJOR_VERSION < 3) and isinstance(text, str):             # <<<<<<<<<<<<<<
@@ -1144,21 +1154,21 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript__text_to_bytes(CYTHON_UNU
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_2) {
 
-    /* "mappyscript/_mappyscript.pyx":27
+    /* "mappyscript/_mappyscript.pyx":28
  *         utf8_data = text.encode('UTF-8')
  *     elif (PY_MAJOR_VERSION < 3) and isinstance(text, str):
  *         text.decode('ASCII') # trial decoding, or however you want to check for plain ASCII data             # <<<<<<<<<<<<<<
  *         utf8_data = text
  *     else:
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_text, __pyx_n_s_decode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_text, __pyx_n_s_decode); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 28, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 28, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "mappyscript/_mappyscript.pyx":28
+    /* "mappyscript/_mappyscript.pyx":29
  *     elif (PY_MAJOR_VERSION < 3) and isinstance(text, str):
  *         text.decode('ASCII') # trial decoding, or however you want to check for plain ASCII data
  *         utf8_data = text             # <<<<<<<<<<<<<<
@@ -1168,7 +1178,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript__text_to_bytes(CYTHON_UNU
     __Pyx_INCREF(__pyx_v_text);
     __pyx_v_utf8_data = __pyx_v_text;
 
-    /* "mappyscript/_mappyscript.pyx":26
+    /* "mappyscript/_mappyscript.pyx":27
  *     if isinstance(text, unicode): # most common case first
  *         utf8_data = text.encode('UTF-8')
  *     elif (PY_MAJOR_VERSION < 3) and isinstance(text, str):             # <<<<<<<<<<<<<<
@@ -1178,7 +1188,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript__text_to_bytes(CYTHON_UNU
     goto __pyx_L3;
   }
 
-  /* "mappyscript/_mappyscript.pyx":30
+  /* "mappyscript/_mappyscript.pyx":31
  *         utf8_data = text
  *     else:
  *         raise ValueError("requires text input, got %s" % type(text))             # <<<<<<<<<<<<<<
@@ -1186,23 +1196,23 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript__text_to_bytes(CYTHON_UNU
  * 
  */
   /*else*/ {
-    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_requires_text_input_got_s, ((PyObject *)Py_TYPE(__pyx_v_text))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_requires_text_input_got_s, ((PyObject *)Py_TYPE(__pyx_v_text))); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 31, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(0, 30, __pyx_L1_error)
+    __PYX_ERR(0, 31, __pyx_L1_error)
   }
   __pyx_L3:;
 
-  /* "mappyscript/_mappyscript.pyx":31
+  /* "mappyscript/_mappyscript.pyx":32
  *     else:
  *         raise ValueError("requires text input, got %s" % type(text))
  *     return utf8_data             # <<<<<<<<<<<<<<
@@ -1214,7 +1224,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript__text_to_bytes(CYTHON_UNU
   __pyx_r = __pyx_v_utf8_data;
   goto __pyx_L0;
 
-  /* "mappyscript/_mappyscript.pyx":23
+  /* "mappyscript/_mappyscript.pyx":24
  * # https://github.com/cython/cython/wiki/FAQ#how-do-i-pass-a-python-string-parameter-on-to-a-c-library
  * 
  * def _text_to_bytes(text):             # <<<<<<<<<<<<<<
@@ -1235,7 +1245,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript__text_to_bytes(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":33
+/* "mappyscript/_mappyscript.pyx":34
  *     return utf8_data
  * 
  * def version():             # <<<<<<<<<<<<<<
@@ -1263,7 +1273,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_2version(CYTHON_UNUSED Py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("version", 0);
 
-  /* "mappyscript/_mappyscript.pyx":34
+  /* "mappyscript/_mappyscript.pyx":35
  * 
  * def version():
  *     return ms.msGetVersion()             # <<<<<<<<<<<<<<
@@ -1271,13 +1281,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_2version(CYTHON_UNUSED Py
  * def version_number():
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBytes_FromString(msGetVersion()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBytes_FromString(msGetVersion()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mappyscript/_mappyscript.pyx":33
+  /* "mappyscript/_mappyscript.pyx":34
  *     return utf8_data
  * 
  * def version():             # <<<<<<<<<<<<<<
@@ -1296,7 +1306,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_2version(CYTHON_UNUSED Py
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":36
+/* "mappyscript/_mappyscript.pyx":37
  *     return ms.msGetVersion()
  * 
  * def version_number():             # <<<<<<<<<<<<<<
@@ -1324,7 +1334,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_4version_number(CYTHON_UN
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("version_number", 0);
 
-  /* "mappyscript/_mappyscript.pyx":37
+  /* "mappyscript/_mappyscript.pyx":38
  * 
  * def version_number():
  *     return ms.msGetVersionInt()             # <<<<<<<<<<<<<<
@@ -1332,13 +1342,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_4version_number(CYTHON_UN
  * def load(fn):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(msGetVersionInt()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(msGetVersionInt()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mappyscript/_mappyscript.pyx":36
+  /* "mappyscript/_mappyscript.pyx":37
  *     return ms.msGetVersion()
  * 
  * def version_number():             # <<<<<<<<<<<<<<
@@ -1357,7 +1367,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_4version_number(CYTHON_UN
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":39
+/* "mappyscript/_mappyscript.pyx":40
  *     return ms.msGetVersionInt()
  * 
  * def load(fn):             # <<<<<<<<<<<<<<
@@ -1391,14 +1401,14 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_6load(CYTHON_UNUSED PyObj
   __Pyx_RefNannySetupContext("load", 0);
   __Pyx_INCREF(__pyx_v_fn);
 
-  /* "mappyscript/_mappyscript.pyx":40
+  /* "mappyscript/_mappyscript.pyx":41
  * 
  * def load(fn):
  *     fn = _text_to_bytes(fn)             # <<<<<<<<<<<<<<
  *     cdef ms.mapObj* _cmap
  *     _cmap = ms.msLoadMap(fn, new_mappath="")
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_text_to_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_text_to_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -1411,13 +1421,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_6load(CYTHON_UNUSED PyObj
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_fn); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_fn); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_fn};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -1425,19 +1435,19 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_6load(CYTHON_UNUSED PyObj
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_fn};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 41, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_INCREF(__pyx_v_fn);
       __Pyx_GIVEREF(__pyx_v_fn);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_fn);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -1446,17 +1456,17 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_6load(CYTHON_UNUSED PyObj
   __Pyx_DECREF_SET(__pyx_v_fn, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mappyscript/_mappyscript.pyx":42
+  /* "mappyscript/_mappyscript.pyx":43
  *     fn = _text_to_bytes(fn)
  *     cdef ms.mapObj* _cmap
  *     _cmap = ms.msLoadMap(fn, new_mappath="")             # <<<<<<<<<<<<<<
  *     return _get_map(_cmap)
  * 
  */
-  __pyx_t_5 = __Pyx_PyObject_AsWritableString(__pyx_v_fn); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_AsWritableString(__pyx_v_fn); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 43, __pyx_L1_error)
   __pyx_v__cmap = msLoadMap(__pyx_t_5, ((char *)""));
 
-  /* "mappyscript/_mappyscript.pyx":43
+  /* "mappyscript/_mappyscript.pyx":44
  *     cdef ms.mapObj* _cmap
  *     _cmap = ms.msLoadMap(fn, new_mappath="")
  *     return _get_map(_cmap)             # <<<<<<<<<<<<<<
@@ -1464,13 +1474,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_6load(CYTHON_UNUSED PyObj
  * def loads(mapstring):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_11mappyscript_12_mappyscript__get_map(__pyx_v__cmap); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_11mappyscript_12_mappyscript__get_map(__pyx_v__cmap); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mappyscript/_mappyscript.pyx":39
+  /* "mappyscript/_mappyscript.pyx":40
  *     return ms.msGetVersionInt()
  * 
  * def load(fn):             # <<<<<<<<<<<<<<
@@ -1493,7 +1503,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_6load(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":45
+/* "mappyscript/_mappyscript.pyx":46
  *     return _get_map(_cmap)
  * 
  * def loads(mapstring):             # <<<<<<<<<<<<<<
@@ -1527,14 +1537,14 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_8loads(CYTHON_UNUSED PyOb
   __Pyx_RefNannySetupContext("loads", 0);
   __Pyx_INCREF(__pyx_v_mapstring);
 
-  /* "mappyscript/_mappyscript.pyx":46
+  /* "mappyscript/_mappyscript.pyx":47
  * 
  * def loads(mapstring):
  *     mapstring = _text_to_bytes(mapstring)             # <<<<<<<<<<<<<<
  *     cdef ms.mapObj* map
  *     map = ms.msLoadMapFromString(mapstring, new_mappath="")
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_text_to_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_text_to_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -1547,13 +1557,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_8loads(CYTHON_UNUSED PyOb
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_mapstring); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_mapstring); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_mapstring};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -1561,19 +1571,19 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_8loads(CYTHON_UNUSED PyOb
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_mapstring};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 47, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_INCREF(__pyx_v_mapstring);
       __Pyx_GIVEREF(__pyx_v_mapstring);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_mapstring);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -1582,17 +1592,17 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_8loads(CYTHON_UNUSED PyOb
   __Pyx_DECREF_SET(__pyx_v_mapstring, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mappyscript/_mappyscript.pyx":48
+  /* "mappyscript/_mappyscript.pyx":49
  *     mapstring = _text_to_bytes(mapstring)
  *     cdef ms.mapObj* map
  *     map = ms.msLoadMapFromString(mapstring, new_mappath="")             # <<<<<<<<<<<<<<
  *     return _get_map(map)
  * 
  */
-  __pyx_t_5 = __Pyx_PyObject_AsWritableString(__pyx_v_mapstring); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_AsWritableString(__pyx_v_mapstring); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 49, __pyx_L1_error)
   __pyx_v_map = msLoadMapFromString(__pyx_t_5, ((char *)""));
 
-  /* "mappyscript/_mappyscript.pyx":49
+  /* "mappyscript/_mappyscript.pyx":50
  *     cdef ms.mapObj* map
  *     map = ms.msLoadMapFromString(mapstring, new_mappath="")
  *     return _get_map(map)             # <<<<<<<<<<<<<<
@@ -1600,13 +1610,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_8loads(CYTHON_UNUSED PyOb
  * cdef _get_map(ms.mapObj* cmap):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_11mappyscript_12_mappyscript__get_map(__pyx_v_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_11mappyscript_12_mappyscript__get_map(__pyx_v_map); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mappyscript/_mappyscript.pyx":45
+  /* "mappyscript/_mappyscript.pyx":46
  *     return _get_map(_cmap)
  * 
  * def loads(mapstring):             # <<<<<<<<<<<<<<
@@ -1629,7 +1639,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_8loads(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":51
+/* "mappyscript/_mappyscript.pyx":52
  *     return _get_map(map)
  * 
  * cdef _get_map(ms.mapObj* cmap):             # <<<<<<<<<<<<<<
@@ -1651,7 +1661,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *__
   PyObject *__pyx_t_8 = NULL;
   __Pyx_RefNannySetupContext("_get_map", 0);
 
-  /* "mappyscript/_mappyscript.pyx":53
+  /* "mappyscript/_mappyscript.pyx":54
  * cdef _get_map(ms.mapObj* cmap):
  * 
  *     if cmap is NULL:             # <<<<<<<<<<<<<<
@@ -1661,7 +1671,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *__
   __pyx_t_1 = ((__pyx_v_cmap == NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "mappyscript/_mappyscript.pyx":54
+    /* "mappyscript/_mappyscript.pyx":55
  * 
  *     if cmap is NULL:
  *         err = ms.msGetErrorObj()             # <<<<<<<<<<<<<<
@@ -1670,18 +1680,18 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *__
  */
     __pyx_v_err = msGetErrorObj();
 
-    /* "mappyscript/_mappyscript.pyx":55
+    /* "mappyscript/_mappyscript.pyx":56
  *     if cmap is NULL:
  *         err = ms.msGetErrorObj()
  *         raise ValueError("{} (Error code {})".format(err.message, err.code))             # <<<<<<<<<<<<<<
  * 
  *     return Map()._setup(cmap)
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Error_code, __pyx_n_s_format); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Error_code, __pyx_n_s_format); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyBytes_FromString(__pyx_v_err->message); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 55, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyBytes_FromString(__pyx_v_err->message); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 56, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_err->code); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 55, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_err->code); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 56, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_6 = NULL;
     __pyx_t_7 = 0;
@@ -1698,7 +1708,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *__
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_4, __pyx_t_5};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -1708,7 +1718,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *__
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
       PyObject *__pyx_temp[3] = {__pyx_t_6, __pyx_t_4, __pyx_t_5};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_7, 2+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -1716,7 +1726,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *__
     } else
     #endif
     {
-      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 55, __pyx_L1_error)
+      __pyx_t_8 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 56, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       if (__pyx_t_6) {
         __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -1727,24 +1737,24 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *__
       PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_7, __pyx_t_5);
       __pyx_t_4 = 0;
       __pyx_t_5 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 55, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 56, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 55, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 56, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 55, __pyx_L1_error)
+    __PYX_ERR(0, 56, __pyx_L1_error)
 
-    /* "mappyscript/_mappyscript.pyx":53
+    /* "mappyscript/_mappyscript.pyx":54
  * cdef _get_map(ms.mapObj* cmap):
  * 
  *     if cmap is NULL:             # <<<<<<<<<<<<<<
@@ -1753,7 +1763,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *__
  */
   }
 
-  /* "mappyscript/_mappyscript.pyx":57
+  /* "mappyscript/_mappyscript.pyx":58
  *         raise ValueError("{} (Error code {})".format(err.message, err.code))
  * 
  *     return Map()._setup(cmap)             # <<<<<<<<<<<<<<
@@ -1761,16 +1771,16 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *__
  * cdef class Map:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_11mappyscript_12_mappyscript_Map), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_11mappyscript_12_mappyscript_Map), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = ((struct __pyx_vtabstruct_11mappyscript_12_mappyscript_Map *)((struct __pyx_obj_11mappyscript_12_mappyscript_Map *)__pyx_t_2)->__pyx_vtab)->_setup(((struct __pyx_obj_11mappyscript_12_mappyscript_Map *)__pyx_t_2), __pyx_v_cmap); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_3 = ((struct __pyx_vtabstruct_11mappyscript_12_mappyscript_Map *)((struct __pyx_obj_11mappyscript_12_mappyscript_Map *)__pyx_t_2)->__pyx_vtab)->_setup(((struct __pyx_obj_11mappyscript_12_mappyscript_Map *)__pyx_t_2), __pyx_v_cmap); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "mappyscript/_mappyscript.pyx":51
+  /* "mappyscript/_mappyscript.pyx":52
  *     return _get_map(map)
  * 
  * cdef _get_map(ms.mapObj* cmap):             # <<<<<<<<<<<<<<
@@ -1794,7 +1804,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript__get_map(struct mapObj *__
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":62
+/* "mappyscript/_mappyscript.pyx":63
  *     cdef ms.mapObj* _cmap
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -1823,7 +1833,7 @@ static int __pyx_pf_11mappyscript_12_mappyscript_3Map___cinit__(struct __pyx_obj
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "mappyscript/_mappyscript.pyx":63
+  /* "mappyscript/_mappyscript.pyx":64
  * 
  *     def __cinit__(self):
  *         self._cmap = ms.msNewMapObj()             # <<<<<<<<<<<<<<
@@ -1832,7 +1842,7 @@ static int __pyx_pf_11mappyscript_12_mappyscript_3Map___cinit__(struct __pyx_obj
  */
   __pyx_v_self->_cmap = msNewMapObj();
 
-  /* "mappyscript/_mappyscript.pyx":62
+  /* "mappyscript/_mappyscript.pyx":63
  *     cdef ms.mapObj* _cmap
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -1846,7 +1856,7 @@ static int __pyx_pf_11mappyscript_12_mappyscript_3Map___cinit__(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":65
+/* "mappyscript/_mappyscript.pyx":66
  *         self._cmap = ms.msNewMapObj()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -1870,7 +1880,7 @@ static void __pyx_pf_11mappyscript_12_mappyscript_3Map_2__dealloc__(struct __pyx
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "mappyscript/_mappyscript.pyx":66
+  /* "mappyscript/_mappyscript.pyx":67
  * 
  *     def __dealloc__(self):
  *         if self._cmap is not NULL:             # <<<<<<<<<<<<<<
@@ -1880,7 +1890,7 @@ static void __pyx_pf_11mappyscript_12_mappyscript_3Map_2__dealloc__(struct __pyx
   __pyx_t_1 = ((__pyx_v_self->_cmap != NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "mappyscript/_mappyscript.pyx":67
+    /* "mappyscript/_mappyscript.pyx":68
  *     def __dealloc__(self):
  *         if self._cmap is not NULL:
  *             ms.msFreeMap(self._cmap)             # <<<<<<<<<<<<<<
@@ -1889,7 +1899,7 @@ static void __pyx_pf_11mappyscript_12_mappyscript_3Map_2__dealloc__(struct __pyx
  */
     msFreeMap(__pyx_v_self->_cmap);
 
-    /* "mappyscript/_mappyscript.pyx":66
+    /* "mappyscript/_mappyscript.pyx":67
  * 
  *     def __dealloc__(self):
  *         if self._cmap is not NULL:             # <<<<<<<<<<<<<<
@@ -1898,7 +1908,7 @@ static void __pyx_pf_11mappyscript_12_mappyscript_3Map_2__dealloc__(struct __pyx
  */
   }
 
-  /* "mappyscript/_mappyscript.pyx":65
+  /* "mappyscript/_mappyscript.pyx":66
  *         self._cmap = ms.msNewMapObj()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -1910,7 +1920,7 @@ static void __pyx_pf_11mappyscript_12_mappyscript_3Map_2__dealloc__(struct __pyx
   __Pyx_RefNannyFinishContext();
 }
 
-/* "mappyscript/_mappyscript.pyx":69
+/* "mappyscript/_mappyscript.pyx":70
  *             ms.msFreeMap(self._cmap)
  * 
  *     cdef _setup(self, ms.mapObj* m):             # <<<<<<<<<<<<<<
@@ -1923,7 +1933,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript_3Map__setup(struct __pyx_o
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("_setup", 0);
 
-  /* "mappyscript/_mappyscript.pyx":70
+  /* "mappyscript/_mappyscript.pyx":71
  * 
  *     cdef _setup(self, ms.mapObj* m):
  *         self._cmap = m             # <<<<<<<<<<<<<<
@@ -1932,7 +1942,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript_3Map__setup(struct __pyx_o
  */
   __pyx_v_self->_cmap = __pyx_v_m;
 
-  /* "mappyscript/_mappyscript.pyx":71
+  /* "mappyscript/_mappyscript.pyx":72
  *     cdef _setup(self, ms.mapObj* m):
  *         self._cmap = m
  *         return self             # <<<<<<<<<<<<<<
@@ -1944,7 +1954,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript_3Map__setup(struct __pyx_o
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "mappyscript/_mappyscript.pyx":69
+  /* "mappyscript/_mappyscript.pyx":70
  *             ms.msFreeMap(self._cmap)
  * 
  *     cdef _setup(self, ms.mapObj* m):             # <<<<<<<<<<<<<<
@@ -1959,7 +1969,7 @@ static PyObject *__pyx_f_11mappyscript_12_mappyscript_3Map__setup(struct __pyx_o
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":74
+/* "mappyscript/_mappyscript.pyx":75
  * 
  *     @property
  *     def name(self):             # <<<<<<<<<<<<<<
@@ -1987,7 +1997,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_4name___get__(struct
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "mappyscript/_mappyscript.pyx":76
+  /* "mappyscript/_mappyscript.pyx":77
  *     def name(self):
  *         # need to convert to a string for Python3
  *         return self._cmap.name.decode('utf-8')             # <<<<<<<<<<<<<<
@@ -1996,14 +2006,14 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_4name___get__(struct
  */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = __pyx_v_self->_cmap->name;
-  __pyx_t_2 = __Pyx_decode_c_string(__pyx_t_1, 0, strlen(__pyx_t_1), NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_decode_c_string(__pyx_t_1, 0, strlen(__pyx_t_1), NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "mappyscript/_mappyscript.pyx":74
+  /* "mappyscript/_mappyscript.pyx":75
  * 
  *     @property
  *     def name(self):             # <<<<<<<<<<<<<<
@@ -2022,7 +2032,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_4name___get__(struct
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":79
+/* "mappyscript/_mappyscript.pyx":80
  * 
  *     @property
  *     def SLD(self):             # <<<<<<<<<<<<<<
@@ -2049,7 +2059,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_3SLD___get__(struct 
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "mappyscript/_mappyscript.pyx":80
+  /* "mappyscript/_mappyscript.pyx":81
  *     @property
  *     def SLD(self):
  *         return ms.msSLDGenerateSLD(self._cmap, -1, NULL)             # <<<<<<<<<<<<<<
@@ -2057,13 +2067,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_3SLD___get__(struct 
  *     def draw(self, output_file):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBytes_FromString(msSLDGenerateSLD(__pyx_v_self->_cmap, -1, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBytes_FromString(msSLDGenerateSLD(__pyx_v_self->_cmap, -1, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "mappyscript/_mappyscript.pyx":79
+  /* "mappyscript/_mappyscript.pyx":80
  * 
  *     @property
  *     def SLD(self):             # <<<<<<<<<<<<<<
@@ -2082,7 +2092,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_3SLD___get__(struct 
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":82
+/* "mappyscript/_mappyscript.pyx":83
  *         return ms.msSLDGenerateSLD(self._cmap, -1, NULL)
  * 
  *     def draw(self, output_file):             # <<<<<<<<<<<<<<
@@ -2115,14 +2125,14 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_4draw(struct __pyx_o
   __Pyx_RefNannySetupContext("draw", 0);
   __Pyx_INCREF(__pyx_v_output_file);
 
-  /* "mappyscript/_mappyscript.pyx":83
+  /* "mappyscript/_mappyscript.pyx":84
  * 
  *     def draw(self, output_file):
  *         output_file = _text_to_bytes(output_file)             # <<<<<<<<<<<<<<
  *         cdef ms.imageObj* img
  * 
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_text_to_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_text_to_bytes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -2135,13 +2145,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_4draw(struct __pyx_o
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_output_file); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_output_file); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_output_file};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -2149,19 +2159,19 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_4draw(struct __pyx_o
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_output_file};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 83, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_INCREF(__pyx_v_output_file);
       __Pyx_GIVEREF(__pyx_v_output_file);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_output_file);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 83, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 84, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -2170,7 +2180,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_4draw(struct __pyx_o
   __Pyx_DECREF_SET(__pyx_v_output_file, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "mappyscript/_mappyscript.pyx":86
+  /* "mappyscript/_mappyscript.pyx":87
  *         cdef ms.imageObj* img
  * 
  *         img = ms.msDrawMap(self._cmap, 0)             # <<<<<<<<<<<<<<
@@ -2179,17 +2189,17 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_4draw(struct __pyx_o
  */
   __pyx_v_img = msDrawMap(__pyx_v_self->_cmap, 0);
 
-  /* "mappyscript/_mappyscript.pyx":87
+  /* "mappyscript/_mappyscript.pyx":88
  * 
  *         img = ms.msDrawMap(self._cmap, 0)
  *         ms.msSaveImage(self._cmap, img, output_file)             # <<<<<<<<<<<<<<
  * 
  *         ms.msFreeImage(img)
  */
-  __pyx_t_5 = __Pyx_PyObject_AsWritableString(__pyx_v_output_file); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_AsWritableString(__pyx_v_output_file); if (unlikely((!__pyx_t_5) && PyErr_Occurred())) __PYX_ERR(0, 88, __pyx_L1_error)
   msSaveImage(__pyx_v_self->_cmap, __pyx_v_img, __pyx_t_5);
 
-  /* "mappyscript/_mappyscript.pyx":89
+  /* "mappyscript/_mappyscript.pyx":90
  *         ms.msSaveImage(self._cmap, img, output_file)
  * 
  *         ms.msFreeImage(img)             # <<<<<<<<<<<<<<
@@ -2198,7 +2208,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_4draw(struct __pyx_o
  */
   msFreeImage(__pyx_v_img);
 
-  /* "mappyscript/_mappyscript.pyx":82
+  /* "mappyscript/_mappyscript.pyx":83
  *         return ms.msSLDGenerateSLD(self._cmap, -1, NULL)
  * 
  *     def draw(self, output_file):             # <<<<<<<<<<<<<<
@@ -2223,17 +2233,17 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_4draw(struct __pyx_o
   return __pyx_r;
 }
 
-/* "mappyscript/_mappyscript.pyx":91
+/* "mappyscript/_mappyscript.pyx":92
  *         ms.msFreeImage(img)
  * 
  *     def draw_buffer(self):             # <<<<<<<<<<<<<<
  *         """
- *         TODO implementation below not working
+ *         See mapserver/mapscript/python/pyextend.i for equivalent in MapScript
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_11mappyscript_12_mappyscript_3Map_7draw_buffer(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static char __pyx_doc_11mappyscript_12_mappyscript_3Map_6draw_buffer[] = "\n        TODO implementation below not working\n        See mapserver/mapscript/python/pyextend.i for equivalent in MapScript\n        ";
+static char __pyx_doc_11mappyscript_12_mappyscript_3Map_6draw_buffer[] = "\n        See mapserver/mapscript/python/pyextend.i for equivalent in MapScript\n        ";
 static PyObject *__pyx_pw_11mappyscript_12_mappyscript_3Map_7draw_buffer(PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *unused) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
@@ -2250,11 +2260,16 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_6draw_buffer(struct 
   struct imageObj *__pyx_v_img;
   unsigned char *__pyx_v_img_buffer;
   int __pyx_v_img_size;
-  unsigned char *__pyx_v_py_string;
+  PyObject *__pyx_v_py_string = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   outputFormatObj *__pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  int __pyx_t_6;
+  PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("draw_buffer", 0);
 
   /* "mappyscript/_mappyscript.pyx":99
@@ -2289,45 +2304,126 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_6draw_buffer(struct 
  *         cdef int img_size
  * 
  *         img_buffer = ms.msSaveImageBuffer(img, &img_size, format)             # <<<<<<<<<<<<<<
- *         #ms.msFreeImage(img)
- *         py_string = img_buffer
+ *         logging.debug("Image buffer size: %i", img_size)
+ *         ms.msFreeImage(img)
  */
   __pyx_v_img_buffer = msSaveImageBuffer(__pyx_v_img, (&__pyx_v_img_size), __pyx_v_format);
 
+  /* "mappyscript/_mappyscript.pyx":107
+ * 
+ *         img_buffer = ms.msSaveImageBuffer(img, &img_size, format)
+ *         logging.debug("Image buffer size: %i", img_size)             # <<<<<<<<<<<<<<
+ *         ms.msFreeImage(img)
+ *         py_string = img_buffer[:img_size]
+ */
+  __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_logging); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_debug); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_img_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = NULL;
+  __pyx_t_6 = 0;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __pyx_t_6 = 1;
+    }
+  }
+  #if CYTHON_FAST_PYCALL
+  if (PyFunction_Check(__pyx_t_4)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_kp_s_Image_buffer_size_i, __pyx_t_3};
+    __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  } else
+  #endif
+  #if CYTHON_FAST_PYCCALL
+  if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
+    PyObject *__pyx_temp[3] = {__pyx_t_5, __pyx_kp_s_Image_buffer_size_i, __pyx_t_3};
+    __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  } else
+  #endif
+  {
+    __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 107, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    if (__pyx_t_5) {
+      __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
+    }
+    __Pyx_INCREF(__pyx_kp_s_Image_buffer_size_i);
+    __Pyx_GIVEREF(__pyx_kp_s_Image_buffer_size_i);
+    PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_6, __pyx_kp_s_Image_buffer_size_i);
+    __Pyx_GIVEREF(__pyx_t_3);
+    PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
+    __pyx_t_3 = 0;
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 107, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
   /* "mappyscript/_mappyscript.pyx":108
  *         img_buffer = ms.msSaveImageBuffer(img, &img_size, format)
- *         #ms.msFreeImage(img)
- *         py_string = img_buffer             # <<<<<<<<<<<<<<
+ *         logging.debug("Image buffer size: %i", img_size)
+ *         ms.msFreeImage(img)             # <<<<<<<<<<<<<<
+ *         py_string = img_buffer[:img_size]
  *         return py_string
  */
-  __pyx_v_py_string = __pyx_v_img_buffer;
+  msFreeImage(__pyx_v_img);
 
   /* "mappyscript/_mappyscript.pyx":109
- *         #ms.msFreeImage(img)
- *         py_string = img_buffer
+ *         logging.debug("Image buffer size: %i", img_size)
+ *         ms.msFreeImage(img)
+ *         py_string = img_buffer[:img_size]             # <<<<<<<<<<<<<<
+ *         return py_string
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyBytes_FromStringAndSize(((const char*)__pyx_v_img_buffer) + 0, __pyx_v_img_size - 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_v_py_string = ((PyObject*)__pyx_t_2);
+  __pyx_t_2 = 0;
+
+  /* "mappyscript/_mappyscript.pyx":110
+ *         ms.msFreeImage(img)
+ *         py_string = img_buffer[:img_size]
  *         return py_string             # <<<<<<<<<<<<<<
+ * 
+ * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyBytes_FromCString(__pyx_v_py_string); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_r = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __Pyx_INCREF(__pyx_v_py_string);
+  __pyx_r = __pyx_v_py_string;
   goto __pyx_L0;
 
-  /* "mappyscript/_mappyscript.pyx":91
+  /* "mappyscript/_mappyscript.pyx":92
  *         ms.msFreeImage(img)
  * 
  *     def draw_buffer(self):             # <<<<<<<<<<<<<<
  *         """
- *         TODO implementation below not working
+ *         See mapserver/mapscript/python/pyextend.i for equivalent in MapScript
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_7);
   __Pyx_AddTraceback("mappyscript._mappyscript.Map.draw_buffer", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_py_string);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -2581,11 +2677,13 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ASCII, __pyx_k_ASCII, sizeof(__pyx_k_ASCII), 0, 0, 1, 1},
   {&__pyx_kp_s_Error_code, __pyx_k_Error_code, sizeof(__pyx_k_Error_code), 0, 0, 1, 0},
+  {&__pyx_kp_s_Image_buffer_size_i, __pyx_k_Image_buffer_size_i, sizeof(__pyx_k_Image_buffer_size_i), 0, 0, 1, 0},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_kp_s_UTF_8, __pyx_k_UTF_8, sizeof(__pyx_k_UTF_8), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_cmap, __pyx_k_cmap, sizeof(__pyx_k_cmap), 0, 0, 1, 1},
+  {&__pyx_n_s_debug, __pyx_k_debug, sizeof(__pyx_k_debug), 0, 0, 1, 1},
   {&__pyx_n_s_decode, __pyx_k_decode, sizeof(__pyx_k_decode), 0, 0, 1, 1},
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
   {&__pyx_n_s_fn, __pyx_k_fn, sizeof(__pyx_k_fn), 0, 0, 1, 1},
@@ -2613,7 +2711,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 31, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -2624,25 +2722,25 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "mappyscript/_mappyscript.pyx":25
+  /* "mappyscript/_mappyscript.pyx":26
  * def _text_to_bytes(text):
  *     if isinstance(text, unicode): # most common case first
  *         utf8_data = text.encode('UTF-8')             # <<<<<<<<<<<<<<
  *     elif (PY_MAJOR_VERSION < 3) and isinstance(text, str):
  *         text.decode('ASCII') # trial decoding, or however you want to check for plain ASCII data
  */
-  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_UTF_8); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_tuple_ = PyTuple_Pack(1, __pyx_kp_s_UTF_8); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 26, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "mappyscript/_mappyscript.pyx":27
+  /* "mappyscript/_mappyscript.pyx":28
  *         utf8_data = text.encode('UTF-8')
  *     elif (PY_MAJOR_VERSION < 3) and isinstance(text, str):
  *         text.decode('ASCII') # trial decoding, or however you want to check for plain ASCII data             # <<<<<<<<<<<<<<
  *         utf8_data = text
  *     else:
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_n_s_ASCII); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_n_s_ASCII); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
@@ -2665,59 +2763,59 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "mappyscript/_mappyscript.pyx":23
+  /* "mappyscript/_mappyscript.pyx":24
  * # https://github.com/cython/cython/wiki/FAQ#how-do-i-pass-a-python-string-parameter-on-to-a-c-library
  * 
  * def _text_to_bytes(text):             # <<<<<<<<<<<<<<
  *     if isinstance(text, unicode): # most common case first
  *         utf8_data = text.encode('UTF-8')
  */
-  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_n_s_text, __pyx_n_s_utf8_data); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(2, __pyx_n_s_text, __pyx_n_s_utf8_data); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mappyscript__mappyscript_pyx, __pyx_n_s_text_to_bytes, 23, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mappyscript__mappyscript_pyx, __pyx_n_s_text_to_bytes, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 24, __pyx_L1_error)
 
-  /* "mappyscript/_mappyscript.pyx":33
+  /* "mappyscript/_mappyscript.pyx":34
  *     return utf8_data
  * 
  * def version():             # <<<<<<<<<<<<<<
  *     return ms.msGetVersion()
  * 
  */
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mappyscript__mappyscript_pyx, __pyx_n_s_version, 33, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mappyscript__mappyscript_pyx, __pyx_n_s_version, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 34, __pyx_L1_error)
 
-  /* "mappyscript/_mappyscript.pyx":36
+  /* "mappyscript/_mappyscript.pyx":37
  *     return ms.msGetVersion()
  * 
  * def version_number():             # <<<<<<<<<<<<<<
  *     return ms.msGetVersionInt()
  * 
  */
-  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mappyscript__mappyscript_pyx, __pyx_n_s_version_number, 36, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_codeobj__8 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mappyscript__mappyscript_pyx, __pyx_n_s_version_number, 37, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__8)) __PYX_ERR(0, 37, __pyx_L1_error)
 
-  /* "mappyscript/_mappyscript.pyx":39
+  /* "mappyscript/_mappyscript.pyx":40
  *     return ms.msGetVersionInt()
  * 
  * def load(fn):             # <<<<<<<<<<<<<<
  *     fn = _text_to_bytes(fn)
  *     cdef ms.mapObj* _cmap
  */
-  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_fn, __pyx_n_s_cmap); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(2, __pyx_n_s_fn, __pyx_n_s_cmap); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
-  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mappyscript__mappyscript_pyx, __pyx_n_s_load, 39, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_codeobj__10 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__9, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mappyscript__mappyscript_pyx, __pyx_n_s_load, 40, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__10)) __PYX_ERR(0, 40, __pyx_L1_error)
 
-  /* "mappyscript/_mappyscript.pyx":45
+  /* "mappyscript/_mappyscript.pyx":46
  *     return _get_map(_cmap)
  * 
  * def loads(mapstring):             # <<<<<<<<<<<<<<
  *     mapstring = _text_to_bytes(mapstring)
  *     cdef ms.mapObj* map
  */
-  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_n_s_mapstring, __pyx_n_s_map); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_tuple__11 = PyTuple_Pack(2, __pyx_n_s_mapstring, __pyx_n_s_map); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mappyscript__mappyscript_pyx, __pyx_n_s_loads, 45, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_mappyscript__mappyscript_pyx, __pyx_n_s_loads, 46, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2819,11 +2917,11 @@ PyMODINIT_FUNC PyInit__mappyscript(void)
   /*--- Type init code ---*/
   __pyx_vtabptr_11mappyscript_12_mappyscript_Map = &__pyx_vtable_11mappyscript_12_mappyscript_Map;
   __pyx_vtable_11mappyscript_12_mappyscript_Map._setup = (PyObject *(*)(struct __pyx_obj_11mappyscript_12_mappyscript_Map *, struct mapObj *))__pyx_f_11mappyscript_12_mappyscript_3Map__setup;
-  if (PyType_Ready(&__pyx_type_11mappyscript_12_mappyscript_Map) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_11mappyscript_12_mappyscript_Map) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
   __pyx_type_11mappyscript_12_mappyscript_Map.tp_print = 0;
-  if (__Pyx_SetVtable(__pyx_type_11mappyscript_12_mappyscript_Map.tp_dict, __pyx_vtabptr_11mappyscript_12_mappyscript_Map) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
-  if (PyObject_SetAttrString(__pyx_m, "Map", (PyObject *)&__pyx_type_11mappyscript_12_mappyscript_Map) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_11mappyscript_12_mappyscript_Map) < 0) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_11mappyscript_12_mappyscript_Map.tp_dict, __pyx_vtabptr_11mappyscript_12_mappyscript_Map) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "Map", (PyObject *)&__pyx_type_11mappyscript_12_mappyscript_Map) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_11mappyscript_12_mappyscript_Map) < 0) __PYX_ERR(0, 60, __pyx_L1_error)
   __pyx_ptype_11mappyscript_12_mappyscript_Map = &__pyx_type_11mappyscript_12_mappyscript_Map;
   /*--- Type import code ---*/
   /*--- Variable import code ---*/
@@ -2845,64 +2943,64 @@ PyMODINIT_FUNC PyInit__mappyscript(void)
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_logging, __pyx_t_1) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mappyscript/_mappyscript.pyx":23
+  /* "mappyscript/_mappyscript.pyx":24
  * # https://github.com/cython/cython/wiki/FAQ#how-do-i-pass-a-python-string-parameter-on-to-a-c-library
  * 
  * def _text_to_bytes(text):             # <<<<<<<<<<<<<<
  *     if isinstance(text, unicode): # most common case first
  *         utf8_data = text.encode('UTF-8')
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11mappyscript_12_mappyscript_1_text_to_bytes, NULL, __pyx_n_s_mappyscript__mappyscript); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11mappyscript_12_mappyscript_1_text_to_bytes, NULL, __pyx_n_s_mappyscript__mappyscript); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_text_to_bytes, __pyx_t_1) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_text_to_bytes, __pyx_t_1) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mappyscript/_mappyscript.pyx":33
+  /* "mappyscript/_mappyscript.pyx":34
  *     return utf8_data
  * 
  * def version():             # <<<<<<<<<<<<<<
  *     return ms.msGetVersion()
  * 
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11mappyscript_12_mappyscript_3version, NULL, __pyx_n_s_mappyscript__mappyscript); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11mappyscript_12_mappyscript_3version, NULL, __pyx_n_s_mappyscript__mappyscript); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_t_1) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_t_1) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mappyscript/_mappyscript.pyx":36
+  /* "mappyscript/_mappyscript.pyx":37
  *     return ms.msGetVersion()
  * 
  * def version_number():             # <<<<<<<<<<<<<<
  *     return ms.msGetVersionInt()
  * 
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11mappyscript_12_mappyscript_5version_number, NULL, __pyx_n_s_mappyscript__mappyscript); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11mappyscript_12_mappyscript_5version_number, NULL, __pyx_n_s_mappyscript__mappyscript); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version_number, __pyx_t_1) < 0) __PYX_ERR(0, 36, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version_number, __pyx_t_1) < 0) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mappyscript/_mappyscript.pyx":39
+  /* "mappyscript/_mappyscript.pyx":40
  *     return ms.msGetVersionInt()
  * 
  * def load(fn):             # <<<<<<<<<<<<<<
  *     fn = _text_to_bytes(fn)
  *     cdef ms.mapObj* _cmap
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11mappyscript_12_mappyscript_7load, NULL, __pyx_n_s_mappyscript__mappyscript); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11mappyscript_12_mappyscript_7load, NULL, __pyx_n_s_mappyscript__mappyscript); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_load, __pyx_t_1) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_load, __pyx_t_1) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mappyscript/_mappyscript.pyx":45
+  /* "mappyscript/_mappyscript.pyx":46
  *     return _get_map(_cmap)
  * 
  * def loads(mapstring):             # <<<<<<<<<<<<<<
  *     mapstring = _text_to_bytes(mapstring)
  *     cdef ms.mapObj* map
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11mappyscript_12_mappyscript_9loads, NULL, __pyx_n_s_mappyscript__mappyscript); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_11mappyscript_12_mappyscript_9loads, NULL, __pyx_n_s_mappyscript__mappyscript); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_loads, __pyx_t_1) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_loads, __pyx_t_1) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "mappyscript/_mappyscript.pyx":1
