@@ -132,7 +132,8 @@ def create_request(mapstring, params):
 
     for idx, key in enumerate(params): 
         request.ParamNames[idx] = _text_to_bytes(key)
-        request.ParamValues[idx] = _text_to_bytes(params[key])
+        val = params[key]
+        request.ParamValues[idx] = _text_to_bytes(val)
 
     request.NumParams = len(params.items())
 
