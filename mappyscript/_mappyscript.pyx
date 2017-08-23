@@ -131,9 +131,10 @@ def create_request(mapstring, params):
     # print(request.type) # MS_GET_REQUEST by default
 
     for idx, key in enumerate(params): 
-        key = _text_to_bytes(key)
+        val = params[key]
+        key = _text_to_bytes(key) # store in a variable or get "Storing unsafe C derivative of temporary Python reference" due to loop
         request.ParamNames[idx] = key
-        val = _text_to_bytes(params[key])
+        val = _text_to_bytes(val)
         request.ParamValues[idx] = val
 
     request.NumParams = len(params.items())
