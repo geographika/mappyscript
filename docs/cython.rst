@@ -27,3 +27,29 @@ Build Errors
 Check paths for build
 
 TypeError: expected bytes, str found
+
+
+Pointers
+--------
+
+https://stackoverflow.com/questions/2660633/declaring-pointers-asterisk-on-the-left-or-right-of-the-space-between-the-type
+
+It's a matter of preference, and somewhat of a holy war, just like brace style.
+
+The style
+
+someType* somePtr;
+is emphasizing the type of the pointer variable. It is saying, essentially, "the type of somePtr is pointer-to-someType".
+
+The style
+
+someType *somePtr
+is emphasizing the type of the pointed-to data. It is saying, essentially, "the type of data pointed to by somePtr is someType".
+
+Also in examples:
+
+http://docs.cython.org/en/latest/src/tutorial/clibraries.html
+
+Queue *queue_new(void);
+
+Queue* queue_new()

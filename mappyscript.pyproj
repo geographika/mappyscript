@@ -46,6 +46,8 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="docs\cython.rst" />
+    <Content Include="docs\images.rst" />
+    <Content Include="docs\swig.rst" />
     <Content Include="LICENSE" />
     <Content Include="mappyscript\mapserver.pxd" />
     <Content Include="mappyscript\_mappyscript.c" />

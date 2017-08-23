@@ -16,7 +16,6 @@ https://github.com/mapserver/mapserver/blob/66309eebb7ba0dc70469efeb40f865a8e88f
 import logging
 cimport mapserver as ms
 from cpython.version cimport PY_MAJOR_VERSION
-from libc.stdio cimport FILE
 
 # see http://cython.readthedocs.io/en/latest/src/tutorial/strings.html
 # https://github.com/cython/cython/wiki/FAQ#how-do-i-pass-a-python-string-parameter-on-to-a-c-library
@@ -109,41 +108,54 @@ cdef class Map:
         py_string = img_buffer[:img_size]
         return py_string
 
-        
-#def _msIO_getStdoutBufferBytes():
-#   """
-#   See mapscript/swiginc/msio.i
-#   For FILE example see http://cython.readthedocs.io/en/latest/src/userguide/language_basics.html#checking-return-values-of-non-cython-functions
-#   There is no -> operator in Cython. Instead of p->x, use p.x
-#   """
-#
-#   #cdef FILE *ptr_fr
-#   #ms.msIOContext *ctx = ms.msIO_getHandler( (FILE *) "stdout" )
-#   cdef ms.msIOContext *ctx = ms.msIO_getHandler(<FILE>"stdout")
-#   cdef ms.msIOBuffer *buf
-#   cdef ms.gdBuffer gdBuf
-#
-#   # if ( ctx == NULL || ctx->write_channel == MS_FALSE || strcmp(ctx->label,"buffer") != 0 ):
-#   #if ( ctx == NULL || ctx->write_channel == False || strcmp(ctx->label,"buffer") != 0 ):
-#	#    #msSetError( MS_MISCERR, "Can't identify msIO buffer.",
-#   #    #                "msIO_getStdoutBufferString" );
-#	#    #gdBuf.data = (unsigned char*)"";
-#	#    #gdBuf.size = 0;
-#	#    #gdBuf.owns_data = MS_FALSE;
-#	#    #return gdBuf;
-#   #    return NULL
-#
-#   #buf = (ms.msIOBuffer *) ctx.cbData #typecast
-#   buf = <ms.msIOBuffer>ctx.cbData # Type casts are written <type>value http://cython.readthedocs.io/en/latest/src/userguide/language_basics.html#differences-between-c-and-cython-expressions
-#
-#   gdBuf.data = buf.data
-#   gdBuf.size = buf.data_offset
-#   gdBuf.owns_data = True # MS_TRUE
-#
-#   # we are seizing ownership of the buffer contents
-#   buf.data_offset = 0;
-#   buf.data_len = 0;
-#   buf.data = NULL;
-#
-#   return gdBuf;
+    def draw_legend(self, output_file):
 
+        output_file = _text_to_bytes(output_file)
+        cdef ms.imageObj* img
+
+        img = ms.msDrawLegend(self._cmap, 0, NULL)
+        ms.msSaveImage(self._cmap, img, output_file)
+        ms.msFreeImage(img)   
+        
+def create_request(mapstring, params):
+
+    mapstring = _text_to_bytes(mapstring)
+    cdef ms.mapObj* map
+    map = ms.msLoadMapFromString(mapstring, new_mappath="")
+    cdef ms.cgiRequestObj *request
+
+    # enum MS_REQUEST_TYPE {MS_GET_REQUEST, MS_POST_REQUEST};
+
+    request = ms.msAllocCgiObj()
+
+    # print(request.type) # MS_GET_REQUEST by default
+
+    for idx, key in enumerate(params): 
+        request.ParamNames[idx] = key
+        request.ParamValues[idx] = params[key]
+
+    request.NumParams = len(params.items())
+
+    ms.msIO_installStdoutToBuffer()
+    
+    # map dispatch 
+    # https://github.com/mapserver/mapserver/blob/branch-7-0/mapscript/swiginc/map.i#L485
+
+    force_ows_mode = 1
+    success = ms.msOWSDispatch(map, request, force_ows_mode)
+
+    if success != 0:             
+        err = ms.msGetErrorObj()
+        raise ValueError("The request failed: {} (Error code {})".format(err.message, err.code))
+
+    content_type = ms.msIO_stripStdoutBufferContentType()
+    ms.msIO_stripStdoutBufferContentHeaders()
+    result = ms.msIO_getStdoutBufferBytes()
+
+    d = {
+        "content_type": content_type,
+        "data": result.data,
+        "size": result.size
+    }
+
+    return result

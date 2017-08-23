@@ -2,6 +2,15 @@ MAP
     NAME "Test"
     EXTENT -100 -100 100 100
     SIZE 400 400
+    LEGEND
+        STATUS ON
+        KEYSIZE 18 12
+        LABEL
+            TYPE truetype
+            SIZE MEDIUM
+            COLOR 0 0 89
+        END
+    END
     LAYER
         STATUS ON
         NAME "TestLayer"
@@ -15,6 +24,7 @@ MAP
             END
         END
         CLASS
+            NAME "My Class"
             STYLE
                 COLOR 0 255 0
                 OUTLINECOLOR 2 2 2
