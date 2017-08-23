@@ -15,6 +15,8 @@ cdef extern from "mapserver.h":
 
     # declare the required MapServer objects
 
+    char* msStrdup(const char * pszString)
+
     # note outputFormatObj is typedef struct in mapserver.h
     ctypedef struct outputFormatObj:
         char *name

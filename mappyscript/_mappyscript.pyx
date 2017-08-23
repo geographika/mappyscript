@@ -27,7 +27,7 @@ def _text_to_bytes(text):
         text.decode('ASCII') # trial decoding, or however you want to check for plain ASCII data
         utf8_data = text
     else:
-        raise ValueError("requires text input, got %s" % type(text))
+        raise ValueError("Requires text input, got %s" % type(text))
     return utf8_data
 
 def version():
@@ -130,12 +130,16 @@ def create_request(mapstring, params):
 
     # print(request.type) # MS_GET_REQUEST by default
 
-    for idx, key in enumerate(params): 
+    # use msStrdup to make a copy of the strings or the params are simply the last variable references 
+    # https://stackoverflow.com/questions/38407896/converting-from-python-list-to-char-and-back-makes-all-elements-the-same-in-cy
+    for idx, key in enumerate(params):
         val = params[key]
-        key = _text_to_bytes(key) # store in a variable or get "Storing unsafe C derivative of temporary Python reference" due to loop
-        request.ParamNames[idx] = key
-        val = _text_to_bytes(val)
-        request.ParamValues[idx] = val
+
+        k = _text_to_bytes(key)
+        request.ParamNames[idx] = ms.msStrdup(k)
+
+        v = _text_to_bytes(val)
+        request.ParamValues[idx] = ms.msStrdup(v)
 
     request.NumParams = len(params.items())
 

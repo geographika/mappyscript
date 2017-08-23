@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>mappyscript</Name>
     <RootNamespace>mappyscript</RootNamespace>
-    <InterpreterId>MSBuild|mappyscript|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|mappyscript3|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,6 +65,15 @@
     <Content Include="tox.ini" />
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="C:\VirtualEnvs\mappyscript3\">
+      <Id>mappyscript3</Id>
+      <Version>3.6</Version>
+      <Description>mappyscript3 (Python 3.6 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="C:\VirtualEnvs\mappyscript\">
       <Id>mappyscript</Id>
       <Version>2.7</Version>

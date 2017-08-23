@@ -108,7 +108,6 @@ END
     return s
 
 def test_request():
-    qs = "KEY1=VAL1&KEY2=VAL2"
 
     params = {
               "SERVICE": "WMS",
