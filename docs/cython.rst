@@ -29,6 +29,25 @@ Check paths for build
 TypeError: expected bytes, str found
 
 
+--
+
+cython unresolved external symbol
+__declspec()
+
+#if defined(_WIN32) && !defined(__CYGWIN__)
+#  define MS_DLL_EXPORT     __declspec(dllexport)
+
+Must have MS_DLL_EXPORT (used to point to __declspec())
+Error only occurs when using in .pyx, not when declared in .pxd e.g. msSLDParseRule in mapogcsld.h
+http://cython.readthedocs.io/en/latest/src/userguide/external_C_code.html
+
+    _mappyscript.obj : error LNK2019: unresolved external symbol msSLDParseRule referenced in function __pyx_pf_11mappyscript_12_mappyscript_14convert_sld
+    build\lib.win-amd64-2.7\mappyscript\_mappyscript.pyd : fatal error LNK1120: 1 unresolved externals
+
+See also https://github.com/mapserver/mapserver/issues/851 - MS_DLL_EXPORT was missing on some functions. 
+
+You could provide your own my_lapack.h header and do 'cdef extern from "my_lapack.h": ...'.  This would allow you complete control over the function prototype. ?
+
 Pointers
 --------
 
@@ -53,3 +72,12 @@ http://docs.cython.org/en/latest/src/tutorial/clibraries.html
 Queue *queue_new(void);
 
 Queue* queue_new()
+
+
+_cmap[0] = tmp # create a pointer to the reference
+#cmap = tmp[0] # dereference the pointer
+
+    cdef public ms.mapObj* _get_mapObj(self):
+        cdef ms.mapObj* cmap
+        tmp = self._cmap
+        cmap = tmp # set this or errors about "Storing unsafe C derivative of temporary Python reference""

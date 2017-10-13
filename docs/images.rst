@@ -13,6 +13,8 @@ SHARPEN
 
 http://pillow.readthedocs.io/en/latest/handbook/tutorial.html#filters
 
+More filters: https://github.com/Tinker-S/SomeImageFilterWithPython
+
 http://pillow.readthedocs.io/en/latest/reference/ImageEnhance.html#module-PIL.ImageEnhance
 
 https://jakevdp.github.io/blog/2012/10/07/xkcd-style-plots-in-matplotlib/
