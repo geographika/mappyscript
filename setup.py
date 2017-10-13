@@ -12,9 +12,10 @@ except:
     USE_CYTHON = False
 
 ext_options = {
+    # D:\MapServer\release-1800-x64-dev\release-1800-x64\bin"
     'include_dirs': [r"D:\MapServer\release-1800-x64-dev\release-1800-x64\include"],
     'library_dirs': [r"D:\MapServer\release-1800-x64-dev\release-1800-x64\lib"],
-    'libraries': ["mapserver"]
+    'libraries': ["mapserver","gdal_i"] #"gdal_i"] # filename is gdal_i.lib, include this or "_mappyscript.obj : error LNK2001: unresolved external symbol CPLParseXMLString"
     }
 
 file_ext = '.pyx' if USE_CYTHON else '.c'
@@ -22,7 +23,7 @@ exts = [Extension("mappyscript._mappyscript", ["mappyscript/_mappyscript" + file
 
 setup(
     name = "mappyscript",
-    version = "0.0.1",
+    version = "0.0.3",
     url = "https://github.com/geographika/mappyscript",
     author = "Seth Girvin",
     license = "MIT",

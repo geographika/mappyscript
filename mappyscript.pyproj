@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c4303e10-2d7a-40c0-bc44-bb9552cef42f</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tests\test.py</StartupFile>
+    <StartupFile>docs\examples\map_book.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,14 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="docs\examples\image_effects.py" />
+    <Compile Include="docs\examples\legends.py" />
+    <Compile Include="docs\examples\map_book.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="docs\examples\sketch.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="mappyscript\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -31,9 +39,13 @@
     <Compile Include="tests\test.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="tests\test_sld.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="docs\" />
+    <Folder Include="docs\examples\" />
     <Folder Include="mappyscript\" />
     <Folder Include="mappyscript\" />
     <Folder Include="tests\" />
@@ -46,6 +58,10 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="docs\cython.rst" />
+    <Content Include="docs\examples.rst" />
+    <Content Include="docs\expression_parser.rst">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="docs\images.rst" />
     <Content Include="docs\swig.rst" />
     <Content Include="LICENSE" />
@@ -61,7 +77,15 @@
     <Content Include="README.rst">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="tests\test_sites.sld" />
+    <Content Include="tests\sld_map.map" />
+    <Content Include="tests\template.html" />
     <Content Include="tests\test.map" />
+    <Content Include="tests\test_sld.map">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="tests\test_template.map" />
+    <Content Include="tests\test_ows.map" />
     <Content Include="tox.ini" />
   </ItemGroup>
   <ItemGroup>
