@@ -12,7 +12,7 @@ MAP
         END
     END
     LAYER
-        STATUS ON
+        STATUS DEFAULT
         NAME "TestLayer"
         TYPE POLYGON
         FEATURE

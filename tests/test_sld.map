@@ -1,0 +1,46 @@
+MAP
+    SYMBOL
+        NAME "sld_mark_symbol_circle_filled"
+        TYPE ellipse
+        FILLED true
+        POINTS
+            1 1
+        END
+    END
+    #EXTENT -341017.37 6596553.56 -340938.25 6596624.20
+    EXTENT -503153.37 6511549.06 -327794.83 6657749.96
+
+    NAME "Test"
+    SIZE 400 400
+    #CONFIG "PROJ_LIB" "C:/MapServer/bin/proj/SHARE"
+    #PROJECTION
+    #    "proj=latlong"
+    #    "ellps=WGS84"
+    #    "datum=WGS84"
+    #END
+    LAYER
+        NAME "Gas Sites"
+        STATUS DEFAULT
+        TYPE POLYGON
+        DATA "D:\Data\OpenSourceViewerData\GasSites_Clipped"
+        CLASS
+            STYLE
+                COLOR 0 0 255
+                OUTLINECOLOR 2 2 2
+            END
+        END
+    END
+
+    LAYER
+        NAME "Towers"
+        STATUS DEFAULT
+        TYPE POINT
+        DATA "D:\Data\OpenSourceViewerData\Towers.shp"
+        CLASS
+            STYLE
+                COLOR 0 0 255
+                OUTLINECOLOR 2 2 2
+            END
+        END
+    END
+END

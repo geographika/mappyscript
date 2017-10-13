@@ -1,0 +1,62 @@
+MAP
+    NAME "Test"
+    EXTENT -100 -100 100 100
+    SIZE 400 400
+    DEBUG 5
+    CONFIG "MS_ERRORFILE" "test_ows.log"
+
+    # need the following or get
+    # ValueError: The request failed: msLoadProjectionString() failed (Error code 27)
+    # as set in metadata
+
+    CONFIG "PROJ_LIB" "C:/MapServer/bin/proj/SHARE"
+    PROJECTION
+        "proj=latlong"
+        "ellps=WGS84"
+        "datum=WGS84"
+    END
+    # http://mapserver.org/output/ogr_output.html
+    OUTPUTFORMAT
+        NAME "geojson"
+        DRIVER "OGR/GEOJSON"
+        MIMETYPE "application/json; subtype=geojson"
+        FORMATOPTION "STORAGE=stream" # this has to be STREAM or MS crashes (could be file also?)
+    END
+    WEB
+      METADATA
+        "wms_title" "OWS Test"
+        "ows_enable_request" "*"
+		"ows_onlineresource" "https://localhost/mapserver/"	
+        "wfs_getfeature_formatlist" "gml,geojson"
+        "wfs_srs" "EPSG:4326"
+      END
+    END
+    LAYER
+        STATUS ON
+        DEBUG 5
+        NAME "TestLayer"
+        TYPE POLYGON
+        METADATA
+            "wfs_title"         "TestLayer" ##REQUIRED
+            #"wfs_srs"           "EPSG:4326" ## REQUIRED
+            "gml_include_items" "all" ## Optional (serves all attributes for layer)
+            "gml_featureid"     "mykey1" ## REQUIRED
+        END
+        PROCESSING "ITEMS=mykey1,mykey2"
+        FEATURE
+            ITEMS "myval1;myval2"
+            POINTS
+                1 1
+                50 50
+                1 50
+                1 1
+            END
+        END
+        CLASS
+            STYLE
+                COLOR 0 0 255
+                OUTLINECOLOR 2 2 2
+            END
+        END
+    END
+END

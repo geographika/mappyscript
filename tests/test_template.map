@@ -1,0 +1,66 @@
+MAP
+    WEB
+        TEMPLATE "template.html"
+        IMAGEPATH "D:/Temp/template/" # must end with backslash
+        TEMPPATH "D:\Temp\template"
+
+        # QUERYFORMAT "text/html" # This works for mode=query (using query templates in CGI mode), but not for mode=browse. The default value is “text/html”. Example:
+
+        METADATA
+            # anything you put in here will be accessible via template tags.
+            "title" "My layer title"
+            "author" "Me!"
+        END
+    END
+    SCALEBAR
+        STYLE 0 # 1 or 0
+        STATUS ON
+        LABEL
+            TEXT "My Scalebar"
+            TYPE truetype
+            SIZE MEDIUM
+            COLOR 0 0 89
+        END
+    END
+    REFERENCE
+        # generate these from another Mapfile
+        STATUS ON
+        IMAGE "reference.png" # required
+        SIZE 600 600 # required
+        EXTENT -500 -500 500 500 # required
+    END
+
+    NAME "Test"
+    EXTENT -100 -100 100 100
+    SIZE 400 400
+    LEGEND
+        STATUS ON # no DEFAULT option here
+        KEYSIZE 18 12
+        LABEL
+            TEXT "My Legend" # not used here
+            TYPE truetype
+            SIZE MEDIUM
+            COLOR 0 0 89
+        END
+    END
+    LAYER
+        STATUS DEFAULT
+        NAME "TestLayer"
+        TYPE POLYGON
+        FEATURE
+            POINTS
+                1 1
+                50 50
+                1 50
+                1 1
+            END
+        END
+        CLASS
+            NAME "My Class"
+            STYLE
+                COLOR 0 255 0
+                OUTLINECOLOR 2 2 2
+            END
+        END
+    END
+END
