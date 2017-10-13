@@ -68,13 +68,13 @@
     <Content Include="mappyscript\mapserver.pxd" />
     <Content Include="mappyscript\_mappyscript.c" />
     <Content Include="mappyscript\_mappyscript.pyx" />
-    <Content Include="README.md" />
+    <Content Include="README.rst" />
     <Content Include="requirements-dev.txt" />
     <Content Include="requirements.txt" />
     <Content Include="setup.cfg">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="README.rst">
+    <Content Include="README.private.rst">
       <SubType>Code</SubType>
     </Content>
     <Content Include="tests\test_sites.sld" />

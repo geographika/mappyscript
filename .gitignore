@@ -277,3 +277,4 @@ build
 /dist
 /mappyscript/_mappyscript.cp36-win_amd64.pyd
 *.pyd
+/README.private.rst
