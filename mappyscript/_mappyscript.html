@@ -2975,9 +2975,9 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_3Map_16process_query_temp
     <span class='pyx_c_api'>__Pyx_ExceptionReset</span>(__pyx_t_9, __pyx_t_10, __pyx_t_11);
     __pyx_L12_try_end:;
   }
-</pre><pre class="cython line score-5" onclick='toggleDiv(this)'>+<span class="">270</span>:             html_string = ms.msProcessQueryTemplate(self._cmap, 1, keys, values, len(params))</pre>
+</pre><pre class="cython line score-5" onclick='toggleDiv(this)'>+<span class="">270</span>:             html_string = ms.msProcessQueryTemplate(self._cmap, 0, keys, values, len(params))</pre>
 <pre class='cython code score-5 '>      __pyx_t_5 = <span class='py_c_api'>PyObject_Length</span>(__pyx_v_params); if (unlikely(__pyx_t_5 == -1)) __PYX_ERR(0, 270, __pyx_L7_error)
-      __pyx_v_html_string = msProcessQueryTemplate(__pyx_v_self-&gt;_cmap, 1, __pyx_v_keys, __pyx_v_values, __pyx_t_5);
+      __pyx_v_html_string = msProcessQueryTemplate(__pyx_v_self-&gt;_cmap, 0, __pyx_v_keys, __pyx_v_values, __pyx_t_5);
 </pre><pre class="cython line score-7" onclick='toggleDiv(this)'>+<span class="">271</span>:         except Exception as ex:</pre>
 <pre class='cython code score-7 '>    __pyx_t_12 = <span class='pyx_c_api'>__Pyx_PyErr_ExceptionMatches</span>(((PyObject *)(&amp;((PyTypeObject*)PyExc_Exception)[0])));
     if (__pyx_t_12) {
@@ -4539,7 +4539,8 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_18create_request(CYTHON_U
 <pre class="cython line score-51" onclick='toggleDiv(this)'>+<span class="">400</span>: def check_status(status, params):</pre>
 <pre class='cython code score-51 '>/* Python wrapper */
 static PyObject *__pyx_pw_11mappyscript_12_mappyscript_21check_status(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_11mappyscript_12_mappyscript_21check_status = {"check_status", (PyCFunction)__pyx_pw_11mappyscript_12_mappyscript_21check_status, METH_VARARGS|METH_KEYWORDS, 0};
+static char __pyx_doc_11mappyscript_12_mappyscript_20check_status[] = "\n    TODO - if this fails it could be as OUTPUT format is missing, so check this\n    Could also be as \"gml_include_items\" \"all\" is missing\n    OWS Exception report not returned correctly\n    ";
+static PyMethodDef __pyx_mdef_11mappyscript_12_mappyscript_21check_status = {"check_status", (PyCFunction)__pyx_pw_11mappyscript_12_mappyscript_21check_status, METH_VARARGS|METH_KEYWORDS, __pyx_doc_11mappyscript_12_mappyscript_20check_status};
 static PyObject *__pyx_pw_11mappyscript_12_mappyscript_21check_status(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_status = 0;
   PyObject *__pyx_v_params = 0;
@@ -4632,11 +4633,16 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
   if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_d, __pyx_n_s_check_status, __pyx_t_1) &lt; 0) __PYX_ERR(0, 400, __pyx_L1_error)
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">401</span>:     # MS_SUCCESS = 0, MS_FAILURE = 1, MS_DONE = 2 (not a valid request)</pre>
-<pre class="cython line score-43" onclick='toggleDiv(this)'>+<span class="">402</span>:     logging.debug("Dispatch status: %i", status)</pre>
-<pre class='cython code score-43 '>  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_GetModuleGlobalName</span>(__pyx_n_s_logging); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 402, __pyx_L1_error)
+</pre><pre class="cython line score-0">&#xA0;<span class="">401</span>:     """</pre>
+<pre class="cython line score-0">&#xA0;<span class="">402</span>:     TODO - if this fails it could be as OUTPUT format is missing, so check this</pre>
+<pre class="cython line score-0">&#xA0;<span class="">403</span>:     Could also be as "gml_include_items" "all" is missing</pre>
+<pre class="cython line score-0">&#xA0;<span class="">404</span>:     OWS Exception report not returned correctly</pre>
+<pre class="cython line score-0">&#xA0;<span class="">405</span>:     """</pre>
+<pre class="cython line score-0">&#xA0;<span class="">406</span>:     # MS_SUCCESS = 0, MS_FAILURE = 1, MS_DONE = 2 (not a valid request)</pre>
+<pre class="cython line score-43" onclick='toggleDiv(this)'>+<span class="">407</span>:     logging.debug("Dispatch status: %i", status)</pre>
+<pre class='cython code score-43 '>  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_GetModuleGlobalName</span>(__pyx_n_s_logging); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
-  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(__pyx_t_2, __pyx_n_s_debug); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 402, __pyx_L1_error)
+  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(__pyx_t_2, __pyx_n_s_debug); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 407, __pyx_L1_error)
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -4654,7 +4660,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
   #if CYTHON_FAST_PYCALL
   if (<span class='py_c_api'>PyFunction_Check</span>(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_kp_s_Dispatch_status_i, __pyx_v_status};
-    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyFunction_FastCall</span>(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
+    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyFunction_FastCall</span>(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
     <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
   } else
@@ -4662,13 +4668,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
   #if CYTHON_FAST_PYCCALL
   if (<span class='pyx_c_api'>__Pyx_PyFastCFunction_Check</span>(__pyx_t_3)) {
     PyObject *__pyx_temp[3] = {__pyx_t_2, __pyx_kp_s_Dispatch_status_i, __pyx_v_status};
-    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyCFunction_FastCall</span>(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
+    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyCFunction_FastCall</span>(__pyx_t_3, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
     <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
   } else
   #endif
   {
-    __pyx_t_5 = <span class='py_c_api'>PyTuple_New</span>(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 402, __pyx_L1_error)
+    __pyx_t_5 = <span class='py_c_api'>PyTuple_New</span>(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 407, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_5);
     if (__pyx_t_2) {
       <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_2); <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_5, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -4679,27 +4685,27 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
     <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_v_status);
     <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_v_status);
     <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_5, 1+__pyx_t_4, __pyx_v_status);
-    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 402, __pyx_L1_error)
+    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_5); __pyx_t_5 = 0;
   }
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">403</span>: </pre>
-<pre class="cython line score-5" onclick='toggleDiv(this)'>+<span class="">404</span>:     if status == 1:</pre>
-<pre class='cython code score-5 '>  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyInt_EqObjC</span>(__pyx_v_status, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 404, __pyx_L1_error)
+</pre><pre class="cython line score-0">&#xA0;<span class="">408</span>: </pre>
+<pre class="cython line score-5" onclick='toggleDiv(this)'>+<span class="">409</span>:     if status == 1:</pre>
+<pre class='cython code score-5 '>  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyInt_EqObjC</span>(__pyx_v_status, __pyx_int_1, 1, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 409, __pyx_L1_error)
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
-  __pyx_t_6 = <span class='pyx_c_api'>__Pyx_PyObject_IsTrue</span>(__pyx_t_1); if (unlikely(__pyx_t_6 &lt; 0)) __PYX_ERR(0, 404, __pyx_L1_error)
+  __pyx_t_6 = <span class='pyx_c_api'>__Pyx_PyObject_IsTrue</span>(__pyx_t_1); if (unlikely(__pyx_t_6 &lt; 0)) __PYX_ERR(0, 409, __pyx_L1_error)
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 /* … */
   }
-</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">405</span>:         err = ms.msGetErrorObj()</pre>
+</pre><pre class="cython line score-0" onclick='toggleDiv(this)'>+<span class="">410</span>:         err = ms.msGetErrorObj()</pre>
 <pre class='cython code score-0 '>    __pyx_v_err = msGetErrorObj();
-</pre><pre class="cython line score-43" onclick='toggleDiv(this)'>+<span class="">406</span>:         logging.warning(params)</pre>
-<pre class='cython code score-43 '>    __pyx_t_3 = <span class='pyx_c_api'>__Pyx_GetModuleGlobalName</span>(__pyx_n_s_logging); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 406, __pyx_L1_error)
+</pre><pre class="cython line score-43" onclick='toggleDiv(this)'>+<span class="">411</span>:         logging.warning(params)</pre>
+<pre class='cython code score-43 '>    __pyx_t_3 = <span class='pyx_c_api'>__Pyx_GetModuleGlobalName</span>(__pyx_n_s_logging); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 411, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
-    __pyx_t_5 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(__pyx_t_3, __pyx_n_s_warning); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 406, __pyx_L1_error)
+    __pyx_t_5 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(__pyx_t_3, __pyx_n_s_warning); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 411, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_5);
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -4713,13 +4719,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
       }
     }
     if (!__pyx_t_3) {
-      __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_CallOneArg</span>(__pyx_t_5, __pyx_v_params); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+      __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_CallOneArg</span>(__pyx_t_5, __pyx_v_params); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 411, __pyx_L1_error)
       <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
     } else {
       #if CYTHON_FAST_PYCALL
       if (<span class='py_c_api'>PyFunction_Check</span>(__pyx_t_5)) {
         PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_params};
-        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyFunction_FastCall</span>(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyFunction_FastCall</span>(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 411, __pyx_L1_error)
         <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
       } else
@@ -4727,31 +4733,31 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
       #if CYTHON_FAST_PYCCALL
       if (<span class='pyx_c_api'>__Pyx_PyFastCFunction_Check</span>(__pyx_t_5)) {
         PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_params};
-        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyCFunction_FastCall</span>(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyCFunction_FastCall</span>(__pyx_t_5, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 411, __pyx_L1_error)
         <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
       } else
       #endif
       {
-        __pyx_t_2 = <span class='py_c_api'>PyTuple_New</span>(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 406, __pyx_L1_error)
+        __pyx_t_2 = <span class='py_c_api'>PyTuple_New</span>(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 411, __pyx_L1_error)
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
         <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_3); <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_2, 0, __pyx_t_3); __pyx_t_3 = NULL;
         <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_v_params);
         <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_v_params);
         <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_2, 0+1, __pyx_v_params);
-        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 406, __pyx_L1_error)
+        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 411, __pyx_L1_error)
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
         <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
       }
     }
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_5); __pyx_t_5 = 0;
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-</pre><pre class="cython line score-98" onclick='toggleDiv(this)'>+<span class="">407</span>:         raise ValueError("The request failed: {} (Error code {})".format(_text_to_unicode(err.message), err.code))</pre>
-<pre class='cython code score-98 '>    __pyx_t_5 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(__pyx_kp_s_The_request_failed_Error_code, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 407, __pyx_L1_error)
+</pre><pre class="cython line score-98" onclick='toggleDiv(this)'>+<span class="">412</span>:         raise ValueError("The request failed: {} (Error code {})".format(_text_to_unicode(err.message), err.code))</pre>
+<pre class='cython code score-98 '>    __pyx_t_5 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(__pyx_kp_s_The_request_failed_Error_code, __pyx_n_s_format); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 412, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_5);
-    __pyx_t_3 = <span class='pyx_c_api'>__Pyx_GetModuleGlobalName</span>(__pyx_n_s_text_to_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 407, __pyx_L1_error)
+    __pyx_t_3 = <span class='pyx_c_api'>__Pyx_GetModuleGlobalName</span>(__pyx_n_s_text_to_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 412, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
-    __pyx_t_7 = <span class='pyx_c_api'>__Pyx_PyBytes_FromString</span>(__pyx_v_err-&gt;message); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 407, __pyx_L1_error)
+    __pyx_t_7 = <span class='pyx_c_api'>__Pyx_PyBytes_FromString</span>(__pyx_v_err-&gt;message); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 412, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_7);
     __pyx_t_8 = NULL;
     if (CYTHON_UNPACK_METHODS &amp;&amp; unlikely(<span class='py_c_api'>PyMethod_Check</span>(__pyx_t_3))) {
@@ -4764,14 +4770,14 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
       }
     }
     if (!__pyx_t_8) {
-      __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyObject_CallOneArg</span>(__pyx_t_3, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
+      __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyObject_CallOneArg</span>(__pyx_t_3, __pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 412, __pyx_L1_error)
       <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_7); __pyx_t_7 = 0;
       <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
     } else {
       #if CYTHON_FAST_PYCALL
       if (<span class='py_c_api'>PyFunction_Check</span>(__pyx_t_3)) {
         PyObject *__pyx_temp[2] = {__pyx_t_8, __pyx_t_7};
-        __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyFunction_FastCall</span>(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
+        __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyFunction_FastCall</span>(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 412, __pyx_L1_error)
         <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_8); __pyx_t_8 = 0;
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
         <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_7); __pyx_t_7 = 0;
@@ -4780,26 +4786,26 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
       #if CYTHON_FAST_PYCCALL
       if (<span class='pyx_c_api'>__Pyx_PyFastCFunction_Check</span>(__pyx_t_3)) {
         PyObject *__pyx_temp[2] = {__pyx_t_8, __pyx_t_7};
-        __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyCFunction_FastCall</span>(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
+        __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyCFunction_FastCall</span>(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 412, __pyx_L1_error)
         <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_8); __pyx_t_8 = 0;
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
         <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_7); __pyx_t_7 = 0;
       } else
       #endif
       {
-        __pyx_t_9 = <span class='py_c_api'>PyTuple_New</span>(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 407, __pyx_L1_error)
+        __pyx_t_9 = <span class='py_c_api'>PyTuple_New</span>(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 412, __pyx_L1_error)
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_9);
         <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_8); <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_9, 0, __pyx_t_8); __pyx_t_8 = NULL;
         <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_7);
         <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_9, 0+1, __pyx_t_7);
         __pyx_t_7 = 0;
-        __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_3, __pyx_t_9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 407, __pyx_L1_error)
+        __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_3, __pyx_t_9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 412, __pyx_L1_error)
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
         <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_9); __pyx_t_9 = 0;
       }
     }
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyInt_From_int</span>(__pyx_v_err-&gt;code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 407, __pyx_L1_error)
+    __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyInt_From_int</span>(__pyx_v_err-&gt;code); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 412, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
     __pyx_t_9 = NULL;
     __pyx_t_4 = 0;
@@ -4816,7 +4822,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
     #if CYTHON_FAST_PYCALL
     if (<span class='py_c_api'>PyFunction_Check</span>(__pyx_t_5)) {
       PyObject *__pyx_temp[3] = {__pyx_t_9, __pyx_t_2, __pyx_t_3};
-      __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyFunction_FastCall</span>(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
+      __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyFunction_FastCall</span>(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 412, __pyx_L1_error)
       <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_9); __pyx_t_9 = 0;
       <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
       <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
@@ -4826,7 +4832,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
     #if CYTHON_FAST_PYCCALL
     if (<span class='pyx_c_api'>__Pyx_PyFastCFunction_Check</span>(__pyx_t_5)) {
       PyObject *__pyx_temp[3] = {__pyx_t_9, __pyx_t_2, __pyx_t_3};
-      __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyCFunction_FastCall</span>(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
+      __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyCFunction_FastCall</span>(__pyx_t_5, __pyx_temp+1-__pyx_t_4, 2+__pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 412, __pyx_L1_error)
       <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_9); __pyx_t_9 = 0;
       <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
       <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
@@ -4834,7 +4840,7 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
     } else
     #endif
     {
-      __pyx_t_7 = <span class='py_c_api'>PyTuple_New</span>(2+__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 407, __pyx_L1_error)
+      __pyx_t_7 = <span class='py_c_api'>PyTuple_New</span>(2+__pyx_t_4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 412, __pyx_L1_error)
       <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_7);
       if (__pyx_t_9) {
         <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_9); <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_7, 0, __pyx_t_9); __pyx_t_9 = NULL;
@@ -4845,34 +4851,34 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
       <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_7, 1+__pyx_t_4, __pyx_t_3);
       __pyx_t_2 = 0;
       __pyx_t_3 = 0;
-      __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
+      __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 412, __pyx_L1_error)
       <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
       <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_7); __pyx_t_7 = 0;
     }
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = <span class='py_c_api'>PyTuple_New</span>(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 407, __pyx_L1_error)
+    __pyx_t_5 = <span class='py_c_api'>PyTuple_New</span>(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 412, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_5);
     <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_1);
     <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_5, 0, __pyx_t_1);
     __pyx_t_1 = 0;
-    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_builtin_ValueError, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 407, __pyx_L1_error)
+    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_builtin_ValueError, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 412, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_5); __pyx_t_5 = 0;
     <span class='pyx_c_api'>__Pyx_Raise</span>(__pyx_t_1, 0, 0, 0);
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 407, __pyx_L1_error)
-</pre><pre class="cython line score-5" onclick='toggleDiv(this)'>+<span class="">408</span>:     elif status == 2:</pre>
-<pre class='cython code score-5 '>  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyInt_EqObjC</span>(__pyx_v_status, __pyx_int_2, 2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 408, __pyx_L1_error)
+    __PYX_ERR(0, 412, __pyx_L1_error)
+</pre><pre class="cython line score-5" onclick='toggleDiv(this)'>+<span class="">413</span>:     elif status == 2:</pre>
+<pre class='cython code score-5 '>  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyInt_EqObjC</span>(__pyx_v_status, __pyx_int_2, 2, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 413, __pyx_L1_error)
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
-  __pyx_t_6 = <span class='pyx_c_api'>__Pyx_PyObject_IsTrue</span>(__pyx_t_1); if (unlikely(__pyx_t_6 &lt; 0)) __PYX_ERR(0, 408, __pyx_L1_error)
+  __pyx_t_6 = <span class='pyx_c_api'>__Pyx_PyObject_IsTrue</span>(__pyx_t_1); if (unlikely(__pyx_t_6 &lt; 0)) __PYX_ERR(0, 413, __pyx_L1_error)
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_6) {
 /* … */
   }
-</pre><pre class="cython line score-43" onclick='toggleDiv(this)'>+<span class="">409</span>:         logging.warning(params)</pre>
-<pre class='cython code score-43 '>    __pyx_t_5 = <span class='pyx_c_api'>__Pyx_GetModuleGlobalName</span>(__pyx_n_s_logging); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 409, __pyx_L1_error)
+</pre><pre class="cython line score-43" onclick='toggleDiv(this)'>+<span class="">414</span>:         logging.warning(params)</pre>
+<pre class='cython code score-43 '>    __pyx_t_5 = <span class='pyx_c_api'>__Pyx_GetModuleGlobalName</span>(__pyx_n_s_logging); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 414, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_5);
-    __pyx_t_7 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(__pyx_t_5, __pyx_n_s_warning); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 409, __pyx_L1_error)
+    __pyx_t_7 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(__pyx_t_5, __pyx_n_s_warning); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 414, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_7);
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -4886,13 +4892,13 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_CallOneArg</span>(__pyx_t_7, __pyx_v_params); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 409, __pyx_L1_error)
+      __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_CallOneArg</span>(__pyx_t_7, __pyx_v_params); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 414, __pyx_L1_error)
       <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
     } else {
       #if CYTHON_FAST_PYCALL
       if (<span class='py_c_api'>PyFunction_Check</span>(__pyx_t_7)) {
         PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_v_params};
-        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyFunction_FastCall</span>(__pyx_t_7, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 409, __pyx_L1_error)
+        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyFunction_FastCall</span>(__pyx_t_7, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 414, __pyx_L1_error)
         <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_5); __pyx_t_5 = 0;
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
       } else
@@ -4900,33 +4906,33 @@ static PyObject *__pyx_pf_11mappyscript_12_mappyscript_20check_status(CYTHON_UNU
       #if CYTHON_FAST_PYCCALL
       if (<span class='pyx_c_api'>__Pyx_PyFastCFunction_Check</span>(__pyx_t_7)) {
         PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_v_params};
-        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyCFunction_FastCall</span>(__pyx_t_7, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 409, __pyx_L1_error)
+        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyCFunction_FastCall</span>(__pyx_t_7, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 414, __pyx_L1_error)
         <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_5); __pyx_t_5 = 0;
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
       } else
       #endif
       {
-        __pyx_t_3 = <span class='py_c_api'>PyTuple_New</span>(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 409, __pyx_L1_error)
+        __pyx_t_3 = <span class='py_c_api'>PyTuple_New</span>(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 414, __pyx_L1_error)
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
         <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_5); <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_3, 0, __pyx_t_5); __pyx_t_5 = NULL;
         <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_v_params);
         <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_v_params);
         <span class='py_macro_api'>PyTuple_SET_ITEM</span>(__pyx_t_3, 0+1, __pyx_v_params);
-        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_7, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 409, __pyx_L1_error)
+        __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_t_7, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 414, __pyx_L1_error)
         <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
         <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
       }
     }
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_7); __pyx_t_7 = 0;
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-</pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">410</span>:         raise ValueError("The request parameters are invalid")</pre>
-<pre class='cython code score-10 '>    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_builtin_ValueError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 410, __pyx_L1_error)
+</pre><pre class="cython line score-10" onclick='toggleDiv(this)'>+<span class="">415</span>:         raise ValueError("The request parameters are invalid")</pre>
+<pre class='cython code score-10 '>    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_Call</span>(__pyx_builtin_ValueError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 415, __pyx_L1_error)
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
     <span class='pyx_c_api'>__Pyx_Raise</span>(__pyx_t_1, 0, 0, 0);
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 410, __pyx_L1_error)
+    __PYX_ERR(0, 415, __pyx_L1_error)
 /* … */
-  __pyx_tuple__13 = <span class='py_c_api'>PyTuple_Pack</span>(1, __pyx_kp_s_The_request_parameters_are_inval); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 410, __pyx_L1_error)
+  __pyx_tuple__13 = <span class='py_c_api'>PyTuple_Pack</span>(1, __pyx_kp_s_The_request_parameters_are_inval); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 415, __pyx_L1_error)
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_tuple__13);
   <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_tuple__13);
 </pre></div></body></html>
