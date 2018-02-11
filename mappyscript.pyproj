@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c4303e10-2d7a-40c0-bc44-bb9552cef42f</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>docs\examples\map_book.py</StartupFile>
+    <StartupFile>tests\test_expressions.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -37,6 +37,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\test.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\test_expressions.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\test_sld.py">

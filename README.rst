@@ -12,6 +12,16 @@ Quick Start
 
     pip install mappyscript
 
+..
+    As it is a wheel file need to update pip from 6.1.1 to 9.0.1
+
+    Get the following if using x64 bit
+
+    (mappyfile-editor) C:\VirtualEnvs\mappyfile-editor\Scripts>pip install mappyscript==0.0.3
+    Collecting mappyscript==0.0.3
+      Could not find a version that satisfies the requirement mappyscript==0.0.3 (from versions: )
+    No matching distribution found for mappyscript==0.0.3
+
 .. code-block:: python
 
     import os
