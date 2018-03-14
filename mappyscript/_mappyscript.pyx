@@ -103,6 +103,7 @@ cdef class Layer:
 
     cdef _setup(self, ms.layerObj* l):
         self._clayer = l
+        # ms.initLayer(self._clayer, NULL)
         return self
 
     def loads(self, snippet):
@@ -116,6 +117,26 @@ cdef class Layer:
     @property
     def numclasses(self):
         return self._clayer.numclasses
+
+    @property
+    def feature_count(self):
+        return ms.msLayerGetNumFeatures(self._clayer)
+
+    @property
+    def name(self):
+        # need to convert to a string for Python3
+        return _text_to_unicode(self._clayer.name)
+
+    def extent(self):
+        cdef ms.rectObj* extent
+        extent = <ms.rectObj*> PyMem_Malloc(sizeof(ms.rectObj))
+        #res = ms.msLayerOpen(self._clayer)
+        #print(res)
+        res = ms.msLayerGetExtent(self._clayer, extent)
+        if res == 1:
+            logging.warning("Failed to get extent for the layer")
+
+        return (extent.minx, extent.miny, extent.maxx, extent.maxy)
 
     def __str__(self):
         return _text_to_unicode(ms.msWriteLayerToString(self._clayer))
@@ -160,16 +181,20 @@ cdef class Map:
             raise ValueError("The request failed: {} (Error code {})".format(_text_to_unicode(err.message), err.code))
 
 
-    #def get_layer_by_name(self, layer_name):
-    #    
-    #    m = self._cmap
-    #    i = ms.msGetLayerIndex(m, name)
-    #
-    #    if i != -1:
-    #      # MS_REFCNT_INCR(self->layers[i]); # from swiginc/map.i
-    #      return (self.m.layers[i]) # return an existing layer
-    #    else:
-    #      return None
+    def get_layer_by_name(self, layer_name):
+       
+        m = self._cmap
+        i = ms.msGetLayerIndex(m, layer_name)
+   
+        if i != -1:
+            # MS_REFCNT_INCR(self->layers[i]); # from swiginc/map.i
+            clayer = m.layers[i]
+            # ms.initLayer(clayer, NULL)
+            layer = Layer()
+            layer._setup(clayer)
+        else:
+            return None
+        return layer
 
 
     @property
@@ -179,6 +204,9 @@ cdef class Map:
     def draw(self, output_file):
         output_file = _text_to_bytes(output_file)
         cdef ms.imageObj* img
+
+        # add any default values for %% placeholders
+        ms.msApplyDefaultSubstitutions(self._cmap)
 
         img = ms.msDrawMap(self._cmap, 0)
         ms.msSaveImage(self._cmap, img, output_file)
@@ -198,17 +226,20 @@ cdef class Map:
         """
         cdef ms.outputFormatObj* format
         cdef ms.imageObj* img
-
-        img = ms.msDrawMap(self._cmap, 0)        
         format = self._cmap.outputformat # TODO allow this to be set so geojson and png can both be used
-        #print(format.name)  # png
-        
+
         cdef unsigned char *img_buffer = NULL
         cdef int img_size
-        
-        img_buffer = ms.msSaveImageBuffer(img, &img_size, format) 
+
+        ms.msApplyDefaultSubstitutions(self._cmap)
+
+        with nogil:
+            # add any default values for %% placeholders
+            img = ms.msDrawMap(self._cmap, 0)
+            img_buffer = ms.msSaveImageBuffer(img, &img_size, format) 
+            ms.msFreeImage(img) 
+
         logging.debug("Image buffer size: %i", img_size)
-        ms.msFreeImage(img) 
         py_string = img_buffer[:img_size]
         return py_string
 
@@ -275,7 +306,7 @@ cdef class Map:
             raise Exception("There was a problem processing the template. Check for any references in the Map file.")
         else:
             return _text_to_unicode(html_string)
-        return self._process_template("msProcessQueryTemplate")
+        # return self._process_template("msProcessQueryTemplate")
 
 
 #    mapserv = msAllocMapServObj();

@@ -23,7 +23,7 @@ exts = [Extension("mappyscript._mappyscript", ["mappyscript/_mappyscript" + file
 
 setup(
     name = "mappyscript",
-    version = "0.0.3",
+    version = "0.0.5",
     url = "https://github.com/geographika/mappyscript",
     author = "Seth Girvin",
     license = "MIT",

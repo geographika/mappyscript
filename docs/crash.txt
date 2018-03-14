@@ -1,0 +1,33 @@
+C:\VirtualEnvs\mappyscript\Scripts\activate
+
+pip install faulthandler
+
+SET PATH=%PATH%;D:\MapServer\release-1800-x64-dev\release-1800-x64\bin
+
+python
+
+import mappyscript
+import faulthandler
+faulthandler.enable()
+
+s = """MAP LAYER TYPE POINT CLASS STYLE SYMBOL "missing" END END END END"""
+m = mappyscript.loads(s)
+m.draw_buffer()
+
+
+https://books.google.fr/books?id=VQDgDAAAQBAJ&pg=PA331&lpg=PA331&dq=python+faulthandler+catch+exceptions&source=bl&ots=NMOo5f4cXz&sig=GzxkVfjGcW_0jR_ZZVMsTNVbpk4&hl=en&sa=X&ved=0ahUKEwjFzqSwh8TZAhVPe8AKHXhUDDAQ6AEIaTAG#v=onepage&q=python%20faulthandler%20catch%20exceptions&f=false
+
+
+The thread tried to read from or write to a virtual address for which it does not have the appropriate access.
+
+Faulting application name: python.exe, version: 0.0.0.0, time stamp: 0x5855a624
+Faulting module name: mapserver.dll, version: 0.0.0.0, time stamp: 0x597c8bc5
+Exception code: 0xc0000005
+Fault offset: 0x000000000009a357
+Faulting process id: 0x30a0
+Faulting application start time: 0x01d3af0f20d9c1c9
+Faulting application path: C:\VirtualEnvs\mappyscript\Scripts\python.exe
+Faulting module path: D:\MapServer\release-1800-x64-dev\release-1800-x64\bin\mapserver.dll
+Report Id: 9727f672-c0d2-4887-a84b-0d6b4dc0b2be
+Faulting package full name: 
+Faulting package-relative application ID: 

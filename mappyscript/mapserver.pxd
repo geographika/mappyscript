@@ -20,6 +20,14 @@ cdef extern from "cpl_minixml.h":
         char pszValue
 
     CPLXMLNode *CPLParseXMLString(const char* xml)
+    
+cdef extern from "mapprimitive.h":
+
+    ctypedef struct rectObj:
+          float minx
+          float miny
+          float maxx
+          float maxy
 
 cdef extern from "mapserver.h":
 
@@ -35,14 +43,19 @@ cdef extern from "mapserver.h":
     cdef struct mapObj:
         char *name
         outputFormatObj* outputformat
+        layerObj **layers
 
     cdef struct layerObj:
         char *name
         int numclasses
 
     int initLayer(layerObj *layer, mapObj *map)
+    int msLayerOpen(layerObj *layer)
+    
  
     int msLayerGetNumFeatures(layerObj *layer)
+
+    int msLayerGetExtent(layerObj *layer, rectObj *extent)
 
     cdef struct imageObj:
         char *imagepath
@@ -65,18 +78,21 @@ cdef extern from "mapserver.h":
 
     # image creation functions
     # MS_DLL_EXPORT imageObj *msDrawMap(mapObj *map, int querymap);
-    imageObj* msDrawMap(mapObj* map, int querymap)
+    imageObj* msDrawMap(mapObj* map, int querymap) nogil
 
     imageObj* msImageCreate()
-    void msFreeImage(imageObj* img)    
+    void msFreeImage(imageObj* img) nogil
     int msSaveImage(mapObj* map, imageObj* img, char* filename)
 
     # MS_DLL_EXPORT unsigned char *msSaveImageBuffer(imageObj* image, int *size_ptr, outputFormatObj *format);
-    unsigned char* msSaveImageBuffer(imageObj *image, int* size_ptr, outputFormatObj* format)
+    unsigned char* msSaveImageBuffer(imageObj *image, int* size_ptr, outputFormatObj* format) nogil
 
     # MS_DLL_EXPORT imageObj WARN_UNUSED *msDrawLegend(mapObj *map, int scale_independent, map_hittest *hittest)
     imageObj* msDrawLegend(mapObj* map, int scale_independent, void *hittest)
     
+    # MS_DLL_EXPORT void msApplyDefaultSubstitutions(mapObj *map);
+    void msApplyDefaultSubstitutions(mapObj* map)
+
 cdef extern from "mapserv.h":
 
     int msCGIDispatchRequest(mapservObj *mapserv)
